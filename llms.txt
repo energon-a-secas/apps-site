@@ -1,0 +1,21 @@
+# Neorgon Apps
+
+> The catalog of the iPhone apps Neorgon makes, at https://apps.neorgon.com/,
+> in Spanish. Each app has a card with its icon, where it really stands (App
+> Store or TestFlight, read from the app's own release docs), screenshots
+> taken from the app in the simulator, and links to its help and privacy
+> policy. Apps without a site of their own keep those pages here.
+
+## Apps
+
+- Naninani: a Japanese reader. On the App Store (1.1.3); 1.2.0 is in review. Help and privacy: https://yomu.neorgon.com/naninani/ and https://yomu.neorgon.com/naninani/privacy/
+- Amigos de Enerbot: the Energon community's member app (pass, juntas, perks, Energones). In internal TestFlight. Help and privacy, in Spanish: https://apps.neorgon.com/amigos/ and https://apps.neorgon.com/amigos/privacy/
+- Pittari: finds the codes in ticket PDFs and screenshots, redraws them sharp, shows them full screen or adds them to Apple Wallet. In internal TestFlight. Support and privacy, in English: https://apps.neorgon.com/pittari/ and https://apps.neorgon.com/pittari/privacy/
+- Kurukuru (Hobby Orbit): a hobby wheel, learning in steps and your own rhythms, on iPhone and Apple Watch. In internal TestFlight. Its pages belong on https://hobbyorbit.neorgon.com/kurukuru/ and are not published yet.
+- HeadPain: a headache diary with a 3D head map and a report for a doctor. In internal TestFlight. Support and privacy, in English: https://apps.neorgon.com/headpain/ and https://apps.neorgon.com/headpain/privacy/
+
+## Notes
+
+- The help and privacy pages load no script.
+- None of the apps has terms of its own; on the App Store, Apple's standard licence applies.
+- Contact: support@neorgon.org (Amigos de Enerbot: contact@neorgon.com).
