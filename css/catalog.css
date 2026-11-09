@@ -158,6 +158,9 @@
   .app__icon { width: 72px; height: 72px; }
   .app__facts > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .shots__strip { margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); scroll-padding-inline: var(--pad); }
+  /* Edge to edge, an outside ring would lose its sides to the viewport. */
+  .shots__strip:focus-visible { outline-offset: -3px; border-radius: 0; }
+  .legend > div { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

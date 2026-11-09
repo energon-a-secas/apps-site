@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-season="off">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://cdn.neorgon.org/v1.0.0/; img-src 'self'; font-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <title>HeadPain privacy policy | Neorgon</title>
-  <meta name="description" content="How HeadPain for iPhone keeps your headache diary on your iPhone, and what Apple Health, weather, share links and exports send, only when you ask.">
+  <meta name="description" content="How HeadPain for iPhone keeps your headache diary on your iPhone, and what Apple Health, weather, share links and exports send, only when you ask">
   <link rel="canonical" href="https://apps.neorgon.com/headpain/privacy/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#040714">
@@ -26,7 +26,7 @@
 </head>
 <body class="doc doc--headpain">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="header-bar doc-header" data-header-mode="app">
+  <header class="header-bar doc-header" data-header-mode="app" data-header-skin="jade">
     <div class="header-logo"><a class="header-title-link" href="../"><span class="doc-brand"><img src="../../assets/icons/headpain.png" alt="" width="36" height="36"><span class="doc-brand-name">HeadPain</span></span></a></div>
     <nav class="doc-nav" aria-label="HeadPain"><a href="../">Support</a><a href="./" aria-current="page">Privacy</a></nav>
   </header>
@@ -45,7 +45,7 @@
       <h2 id="device-title">What stays on your iPhone</h2>
       <ul>
         <li><strong>Your diary.</strong> Your headaches (when they started and ended, how strong they were, where they hurt and what they felt like, what came before and what helped, and your notes), your daily check-ins and follow-ups, your conditions, plan, techniques and medicines, and your settings. If you turn on Apple Health or weather, it also keeps a summary of each day from them (below). HeadPain keeps them in one file in its own storage on your iPhone, with a copy from each of the last 14 days so a damaged file can be recovered.</li>
-        <li><strong>Your helper.</strong> The name and phone number you enter in Safety and help, so Help can message or call them.</li>
+        <li><strong>Your helper.</strong> The name and phone number you enter in You &gt; Safety and help, so Help can message or call them.</li>
         <li><strong>Widgets, controls and the Live Activity</strong> read and write the same diary on your iPhone. Reminders are notifications scheduled on your iPhone; there is no push server.</li>
       </ul>
       <p>Nothing in this list is sent to Neorgon or anyone else, except as described below.</p>
@@ -53,7 +53,7 @@
 
     <section id="health" aria-labelledby="health-title">
       <h2 id="health-title">Apple Health</h2>
-      <p>HeadPain asks for access to Health only when you turn on <strong>Use Apple Health</strong>, in You, Apple Health and weather. It then reads your sleep, steps, workouts and menstrual flow on your iPhone, and keeps a summary of each day in your diary (hours asleep, steps, minutes of workouts and whether you had your period), so Patterns can include them. If you also turn on <strong>Save each headache to Health</strong>, it writes each headache to Health with its severity (mild, moderate or severe).</p>
+      <p>HeadPain asks for access to Health only when you turn on <strong>Use Apple Health</strong>, in You &gt; Apple Health and weather. It then reads your sleep, steps, workouts and menstrual flow on your iPhone, and keeps a summary of each day in your diary (hours asleep, steps, minutes of workouts and whether you had your period), so Patterns can include them. If you also turn on <strong>Save each headache to Health</strong>, it writes each headache to Health with its severity (mild, moderate or severe).</p>
       <p>HeadPain never sends Health data to Neorgon or anyone else, and never uses it for advertising. Those daily summaries leave your iPhone only inside a file you choose to export: the daily check-ins (CSV) carry hours asleep and steps, and the full backup (JSON) carries everything in your diary. You can change HeadPain’s access at any time in the Health app.</p>
     </section>
 
@@ -67,7 +67,7 @@
       <h2 id="sharing-title">Sharing and exporting, only when you ask</h2>
       <ul>
         <li><strong>Share map</strong>, on an episode, makes a link to headpain.neorgon.com that shows that head map, read-only. The link carries the map itself: the episode’s title, the pains with their names and colours, the places you marked with how strong they were and their notes, and, if you add it, how the headache affected you. Your triggers, daily context, medicines, follow-ups and timeline are not in it. Anyone with the link can see the map, so send it only to people you choose.</li>
-        <li><strong>Your data</strong>, in You, exports a report for a clinician (PDF), your episodes and daily check-ins (CSV) and a full backup (JSON). They go wherever you send them from the share sheet. The backup holds your whole diary, and the daily check-ins include the Apple Health and weather summaries described above.</li>
+        <li><strong>Your data</strong>, in You &gt; Your data, exports a report for a clinician (PDF), your episodes and daily check-ins (CSV) and a full backup (JSON). They go wherever you send them from the share sheet. The backup holds your whole diary, and the daily check-ins include the Apple Health and weather summaries described above.</li>
       </ul>
       <p>HeadPain never sends a link or a file anywhere by itself: you choose where each one goes.</p>
     </section>
@@ -93,7 +93,7 @@
 
     <section aria-labelledby="children-title">
       <h2 id="children-title">Children</h2>
-      <p>HeadPain doesn’t ask anyone for their name, email or age, and it isn’t made for children.</p>
+      <p>HeadPain doesn’t ask for your name, email or age, and it isn’t made for children.</p>
     </section>
 
     <section id="contact" aria-labelledby="contact-title">
@@ -103,6 +103,6 @@
       <p><a class="back" href="../">HeadPain support</a></p>
     </section>
   </main>
-  <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="Related pages"><a href="../">HeadPain support</a><a href="../../">All apps</a><a href="https://neorgon.com/" rel="noreferrer">Neorgon</a></nav></div></footer>
+  <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="Related pages"><a href="../">HeadPain support</a><a href="../../">All apps</a><a href="https://neorgon.com/" rel="noreferrer">Part of Neorgon</a></nav></div></footer>
 </body>
 </html>

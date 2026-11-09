@@ -16,7 +16,7 @@
     var(--bg);
 }
 
-.doc-brand { display: inline-flex; align-items: center; gap: var(--space-3); font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
+.doc-brand { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; min-width: 44px; font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
 .doc-brand img { width: 36px; height: 36px; border-radius: 9px; flex: none; }
 .doc-nav { display: flex; align-items: center; gap: var(--space-4); margin-left: auto; }
 .doc-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); font-weight: 600; }
@@ -41,7 +41,7 @@
 .doc-main .kicker { display: flex; align-items: center; gap: var(--space-2); color: var(--text-muted); font-size: var(--text-sm); letter-spacing: 0.04em; margin: 0; }
 .doc-main .kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--app-ink); flex: none; }
 .doc-main .lead { color: var(--text-secondary); font-size: 1.2rem; line-height: 1.6; margin-bottom: var(--space-6); }
-.doc-main .card { background: var(--surface-1); border: 1px solid var(--border); border-left: 3px solid var(--app-hue); border-radius: var(--radius-lg); padding: var(--space-4) var(--space-6); margin: var(--space-4) 0; }
+.doc-main .card { background: color-mix(in srgb, var(--app-hue) 9%, var(--surface-1)); border: 1px solid color-mix(in srgb, var(--app-hue) 45%, var(--border)); border-radius: var(--radius-lg); padding: var(--space-4) var(--space-6); margin: var(--space-4) 0; }
 .doc-main .card p:last-child { margin-bottom: 0; }
 
 .doc-main .contents { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); padding: var(--space-2) 0; border-block: 1px solid var(--border); margin: var(--space-6) 0 var(--space-2); }

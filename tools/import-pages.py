@@ -25,13 +25,13 @@ APPS = {
         'name': 'Amigos de Enerbot', 'lang': 'es',
         'help': 'Ayuda', 'privacy': 'Privacidad', 'policy': 'Política de privacidad',
         'all': 'Todas las apps', 'crumb': 'Todas las apps de Neorgon', 'related': 'Páginas relacionadas',
-        'skip': 'Ir al contenido',
+        'skip': 'Ir al contenido', 'part': 'Parte de Neorgon', 'skin': '',
     },
     'pittari': {
         'name': 'Pittari', 'lang': 'en',
         'help': 'Support', 'privacy': 'Privacy', 'policy': 'Privacy policy',
         'all': 'All apps', 'crumb': 'All Neorgon apps', 'related': 'Related pages',
-        'skip': 'Skip to content',
+        'skip': 'Skip to content', 'part': 'Part of Neorgon', 'skin': 'brass',
     },
 }
 
@@ -49,7 +49,8 @@ def one(pattern, text, what, path):
 def page(app, cfg, draft, privacy):
     text = draft.read_text(encoding='utf-8')
     title = one(r'<title>(.*?)</title>', text, 'title', draft)
-    desc = one(r'<meta name="description" content="(.*?)">', text, 'description', draft)
+    # The fleet's meta descriptions end without a period; the draft's words are kept.
+    desc = one(r'<meta name="description" content="(.*?)">', text, 'description', draft).rstrip('.')
     canonical = one(r'<link rel="canonical" href="(.*?)">', text, 'canonical', draft)
     want = f'https://apps.neorgon.com/{app}/' + ('privacy/' if privacy else '')
     if canonical != want:
@@ -63,6 +64,7 @@ def page(app, cfg, draft, privacy):
     footer_first = (f'<a href="../">{cfg["help"]}</a>' if privacy
                     else f'<a href="privacy/">{cfg["policy"]}</a>')
     name = html.escape(cfg['name'])
+    skin = f' data-header-skin="{cfg["skin"]}"' if cfg['skin'] else ''
     return f'''<!doctype html>
 <html lang="{cfg["lang"]}">
 <head>
@@ -90,7 +92,7 @@ def page(app, cfg, draft, privacy):
 </head>
 <body class="doc doc--{app}">
   <a class="skip-link" href="#main">{cfg["skip"]}</a>
-  <header class="header-bar doc-header" data-header-mode="app">
+  <header class="header-bar doc-header" data-header-mode="app"{skin}>
     <div class="header-logo"><a class="header-title-link" href="{home}"><span class="doc-brand"><img src="{root}assets/icons/{app}.png" alt="" width="36" height="36"><span class="doc-brand-name">{name}</span></span></a></div>
     <nav class="doc-nav" aria-label="{name}"><a href="{home}"{here_help}>{cfg["help"]}</a><a href="{priv_href}"{here_priv}>{cfg["privacy"]}</a></nav>
   </header>
@@ -98,7 +100,7 @@ def page(app, cfg, draft, privacy):
     <p class="crumb"><a href="{root}">&larr; {cfg["crumb"]}</a></p>
     {main}
   </main>
-  <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="{cfg["related"]}">{footer_first}<a href="{root}">{cfg["all"]}</a><a href="https://neorgon.com/" rel="noreferrer">Neorgon</a></nav></div></footer>
+  <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="{cfg["related"]}">{footer_first}<a href="{root}">{cfg["all"]}</a><a href="https://neorgon.com/" rel="noreferrer">{cfg["part"]}</a></nav></div></footer>
 </body>
 </html>
 '''
