@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Written for this site from projects/headpain-ios (main, build 5); the shell matches tools/import-pages.py.
+       Update it before a build that changes what HeadPain reads or sends ships (the face scan on the face-scan branch does). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://cdn.neorgon.org/v1.0.0/; img-src 'self'; font-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>HeadPain privacy policy | Neorgon</title>
+  <meta name="description" content="How HeadPain for iPhone keeps your headache diary on your iPhone, and what Apple Health, weather, share links and exports send, only when you ask.">
+  <link rel="canonical" href="https://apps.neorgon.com/headpain/privacy/">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#040714">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Neorgon Apps">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="neo-mark" content="on">
+  <link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/styles/base.css">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/neorgon-header.css">
+  <link rel="stylesheet" href="../../css/neorgon-footer.css">
+  <link rel="stylesheet" href="../../css/doc.css">
+</head>
+<body class="doc doc--headpain">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header-bar doc-header" data-header-mode="app">
+    <div class="header-logo"><a class="header-title-link" href="../"><span class="doc-brand"><img src="../../assets/icons/headpain.png" alt="" width="36" height="36"><span class="doc-brand-name">HeadPain</span></span></a></div>
+    <nav class="doc-nav" aria-label="HeadPain"><a href="../">Support</a><a href="./" aria-current="page">Privacy</a></nav>
+  </header>
+  <main id="main" class="doc-main" tabindex="-1">
+    <p class="crumb"><a href="../../">&larr; All Neorgon apps</a></p>
+    <p class="kicker">HeadPain for iPhone · 9 November 2026</p>
+    <h1>Your diary.<br>Your iPhone.</h1>
+    <p class="lead">Privacy policy for HeadPain, its widgets, its controls and its Live Activity, developed by Neorgon.</p>
+    <div class="card">
+      <p>HeadPain has no account, no ads, no analytics, no tracking and no third-party code. Your diary is kept on your iPhone, and Neorgon never receives it.</p>
+      <p>Only two things leave your iPhone, and only when you turn them on or ask: weather, which sends an approximate location to Open-Meteo, and a share link or a file you export. Apple Health, if you connect it, is read and written on your iPhone. Each is explained below.</p>
+    </div>
+    <nav class="contents" aria-label="On this page"><a href="#device">On your iPhone</a><a href="#health">Apple Health</a><a href="#weather">Weather</a><a href="#sharing">Sharing</a><a href="#apple">Apple services</a><a href="#remove">Remove data</a><a href="#contact">Contact</a></nav>
+
+    <section id="device" aria-labelledby="device-title">
+      <h2 id="device-title">What stays on your iPhone</h2>
+      <ul>
+        <li><strong>Your diary.</strong> Your headaches (when they started and ended, how strong they were, where they hurt and what they felt like, what came before and what helped, and your notes), your daily check-ins and follow-ups, your conditions, plan, techniques and medicines, and your settings. If you turn on Apple Health or weather, it also keeps a summary of each day from them (below). HeadPain keeps them in one file in its own storage on your iPhone, with a copy from each of the last 14 days so a damaged file can be recovered.</li>
+        <li><strong>Your helper.</strong> The name and phone number you enter in Safety and help, so Help can message or call them.</li>
+        <li><strong>Widgets, controls and the Live Activity</strong> read and write the same diary on your iPhone. Reminders are notifications scheduled on your iPhone; there is no push server.</li>
+      </ul>
+      <p>Nothing in this list is sent to Neorgon or anyone else, except as described below.</p>
+    </section>
+
+    <section id="health" aria-labelledby="health-title">
+      <h2 id="health-title">Apple Health</h2>
+      <p>HeadPain asks for access to Health only when you turn on <strong>Use Apple Health</strong>, in You, Apple Health and weather. It then reads your sleep, steps, workouts and menstrual flow on your iPhone, and keeps a summary of each day in your diary (hours asleep, steps, minutes of workouts and whether you had your period), so Patterns can include them. If you also turn on <strong>Save each headache to Health</strong>, it writes each headache to Health with its severity (mild, moderate or severe).</p>
+      <p>HeadPain never sends Health data to Neorgon or anyone else, and never uses it for advertising. Those daily summaries leave your iPhone only inside a file you choose to export: the daily check-ins (CSV) carry hours asleep and steps, and the full backup (JSON) carries everything in your diary. You can change HeadPain’s access at any time in the Health app.</p>
+    </section>
+
+    <section id="weather" aria-labelledby="weather-title">
+      <h2 id="weather-title">Weather</h2>
+      <p>If you turn on <strong>Add weather to my diary</strong>, HeadPain asks to use your location while you use the app, at approximate accuracy only. It rounds the location to one decimal place, about 11 km, and sends that to <a href="https://open-meteo.com/" rel="noreferrer">Open-Meteo</a> with the number of past days it needs, to get air pressure, humidity and temperature. Open-Meteo receives that request, like any website, under its own terms; Neorgon receives nothing.</p>
+      <p>The weather is saved with your diary, and the daily check-ins (CSV) include its air pressure. Your location is not saved.</p>
+    </section>
+
+    <section id="sharing" aria-labelledby="sharing-title">
+      <h2 id="sharing-title">Sharing and exporting, only when you ask</h2>
+      <ul>
+        <li><strong>Share map</strong>, on an episode, makes a link to headpain.neorgon.com that shows that head map, read-only. The link carries the map itself: the episode’s title, the pains with their names and colours, the places you marked with how strong they were and their notes, and, if you add it, how the headache affected you. Your triggers, daily context, medicines, follow-ups and timeline are not in it. Anyone with the link can see the map, so send it only to people you choose.</li>
+        <li><strong>Your data</strong>, in You, exports a report for a clinician (PDF), your episodes and daily check-ins (CSV) and a full backup (JSON). They go wherever you send them from the share sheet. The backup holds your whole diary, and the daily check-ins include the Apple Health and weather summaries described above.</li>
+      </ul>
+      <p>HeadPain never sends a link or a file anywhere by itself: you choose where each one goes.</p>
+    </section>
+
+    <section id="apple" aria-labelledby="apple-title">
+      <h2 id="apple-title">Apple services</h2>
+      <h3>Contacts and Messages</h3>
+      <p>Choosing your helper from your contacts uses the system contact picker, which shows HeadPain only the contact you pick and needs no permission. Messages and calls from Help go through your iPhone and your carrier.</p>
+      <h3>Downloads, TestFlight and diagnostics</h3>
+      <p>Apple handles downloads, updates, TestFlight and crash reports under its own terms and your device settings. If you choose to share analytics with app developers, or to send TestFlight feedback, Apple may pass crash reports or that feedback to Neorgon. HeadPain adds no analytics or crash-reporting code of its own.</p>
+    </section>
+
+    <section id="remove" aria-labelledby="remove-title">
+      <h2 id="remove-title">Keeping and removing data</h2>
+      <p>Your diary stays on your iPhone until you remove it. You can delete an episode or a note in the app, and deleting HeadPain removes its diary, its copies and its settings from your iPhone. Headaches saved to Health stay in Health until you delete them there. Your iCloud or computer backups may hold copies according to your own backup settings; manage those through Apple or your computer.</p>
+      <p>Neorgon holds none of your diary, so it can’t read, recover or delete it for you.</p>
+    </section>
+
+    <section aria-labelledby="support-title">
+      <h2 id="support-title">If you write to us</h2>
+      <p>If you email support, Neorgon receives your address, your message and anything you attach, and uses them only to answer you and handle your request, never for advertising and never sold. Email providers process the messages to deliver and store them. Support messages are kept only as long as the request needs; ask and they are deleted. Please don’t send your diary or a backup.</p>
+    </section>
+
+    <section aria-labelledby="children-title">
+      <h2 id="children-title">Children</h2>
+      <p>HeadPain doesn’t ask anyone for their name, email or age, and it isn’t made for children.</p>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Questions or changes</h2>
+      <p>For privacy questions or requests, write to Neorgon at <a href="mailto:support@neorgon.org?subject=HeadPain%20privacy">support@neorgon.org</a>.</p>
+      <p>If HeadPain’s handling of data changes, this policy is updated before that version ships and the date above changes.</p>
+      <p><a class="back" href="../">HeadPain support</a></p>
+    </section>
+  </main>
+  <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="Related pages"><a href="../">HeadPain support</a><a href="../../">All apps</a><a href="https://neorgon.com/" rel="noreferrer">Neorgon</a></nav></div></footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+/* The catalog page. Each app carries its icon's hue as --app-hue, read from the
+   icon renders (packages/app-icons), and a light tint of it as --app-ink for text
+   and rules on the dark page. */
+
+.app--naninani { --app-hue: #6c4ceb; --app-ink: #b3a4ff; }
+.app--amigos   { --app-hue: #8c37a8; --app-ink: #d9a0ec; }
+.app--pittari  { --app-hue: #f0ae49; --app-ink: #f6c97f; }
+.app--kurukuru { --app-hue: #3445ae; --app-ink: #a7b3ff; }
+.app--headpain { --app-hue: #41826d; --app-ink: #8fd3b8; }
+
+.catalog {
+  --pad: var(--space-6);
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--pad) 80px;
+  display: grid;
+  gap: 64px;
+}
+
+/* ── Intro ─────────────────────────────────────────────────── */
+.intro { display: grid; gap: var(--space-4); }
+.intro__title, .intro__lead { max-width: 40ch; }
+.intro__lead { max-width: 64ch; }
+.intro__title {
+  font-size: clamp(1.75rem, 4.6vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.intro__lead { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.65; }
+
+.legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: var(--text-sm); }
+.legend > div { display: flex; align-items: center; gap: var(--space-2); }
+.legend dd { color: var(--text-secondary); }
+
+.jump { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 6px 14px 6px 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+}
+.jump a:hover { border-color: var(--border-strong); background: var(--surface-2); }
+.jump img { width: 30px; height: 30px; flex: none; }
+
+/* ── Status ────────────────────────────────────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.status--store { color: #86efac; border-color: rgb(134 239 172 / 35%); background: rgb(134 239 172 / 8%); }
+.status--beta { color: #fcd34d; border-color: rgb(252 211 77 / 35%); background: rgb(252 211 77 / 8%); }
+
+/* ── One app ───────────────────────────────────────────────── */
+.app {
+  display: grid;
+  gap: var(--space-6);
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 80px;
+  min-width: 0;
+}
+.app > * { min-width: 0; }
+.app__info { display: grid; gap: var(--space-4); align-content: start; }
+.app__head { display: flex; align-items: center; gap: var(--space-4); }
+.app__icon {
+  width: 88px;
+  height: 88px;
+  flex: none;
+  filter: drop-shadow(0 10px 26px color-mix(in srgb, var(--app-hue) 55%, transparent));
+}
+.app__name { font-size: clamp(1.5rem, 3.2vw, 2rem); line-height: 1.15; letter-spacing: -0.015em; font-weight: 700; }
+.app__tagline { margin-top: 2px; color: var(--app-ink); font-size: var(--text-sm); font-weight: 600; }
+.app__desc { color: var(--text-secondary); font-size: 1.0625rem; line-height: 1.65; }
+.app__state { color: var(--text-secondary); font-size: var(--text-sm); line-height: 1.7; }
+.app__state .status { margin-right: var(--space-1); }
+
+.app__links { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+.app__facts { display: grid; gap: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--border); font-size: var(--text-sm); }
+.app__facts > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--space-3); }
+.app__facts dt { color: var(--text-muted); }
+.app__facts dd { color: var(--text-secondary); line-height: 1.55; }
+
+.app a:not(.btn), .terms a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--app-ink, var(--accent-bright));
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+/* ── Screenshots ───────────────────────────────────────────── */
+.shots { margin: 0; min-width: 0; }
+.shots__strip {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 2px;
+  padding: 4px 2px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.shots__strip:focus-visible { outline: 2px solid var(--app-ink); outline-offset: 4px; border-radius: var(--radius); }
+.shots__strip img {
+  flex: 0 0 auto;
+  width: clamp(164px, 42vw, 212px);
+  height: auto;
+  aspect-ratio: 480 / 1043;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  box-shadow: 0 14px 30px rgb(0 0 0 / 35%);
+  scroll-snap-align: start;
+}
+.shots figcaption { margin-top: var(--space-2); color: var(--text-muted); font-size: var(--text-xs); line-height: 1.5; }
+
+/* ── Agreements ────────────────────────────────────────────── */
+.terms { display: grid; gap: var(--space-3); max-width: 72ch; padding-top: 48px; border-top: 1px solid var(--border); }
+.terms__title { font-size: var(--text-xl); font-weight: 700; }
+.terms p { color: var(--text-secondary); line-height: 1.7; }
+
+/* ── Wide screens: the facts beside the screenshots ────────── */
+@media (min-width: 960px) {
+  .app { grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); gap: 48px; align-items: start; }
+  /* Three screenshots and the edge of a fourth, so the strip reads as one
+     that scrolls. */
+  .shots__strip img { width: 184px; }
+}
+
+/* ── Phones: the strip runs to the screen's edges ─────────── */
+@media (max-width: 600px) {
+  .catalog { --pad: var(--space-4); gap: 48px; padding-top: var(--space-6); }
+  .app { padding-top: 36px; }
+  .app__icon { width: 72px; height: 72px; }
+  .app__facts > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .shots__strip { margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); scroll-padding-inline: var(--pad); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shots__strip { scroll-behavior: auto; }
+}

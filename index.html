@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Strict CSP. An inline script runs only if its sha256 is listed: the one hash is the theme
+       guard further down, so editing that script means re-hashing it (smoke check 29 reports a
+       mismatch). Inline on*="" handlers never run; attach listeners from a script file. Add a
+       source only when the page loads from it, as an exact host or a pinned path, never a whole
+       package CDN. frame-ancestors, report-uri and sandbox are ignored in a meta tag, so they
+       are left out. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-na6phygP/tfoCIp4oBeQgGJJpQsZob/udrLum+20QTI=' https://gc.zgo.at https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://cdn.neorgon.org/v1.0.0/; img-src 'self' data: https://neorgon.goatcounter.com; font-src 'self'; connect-src 'self' https://neorgon.goatcounter.com https://cloudflareinsights.com; manifest-src 'self'; frame-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="Neorgon Apps">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="neo-mark" content="on">
+  <title>Neorgon Apps | Hechas para iPhone</title>
+  <meta name="description" content="Conoce las apps para iPhone de Neorgon: dónde está cada una hoy, capturas reales y sus páginas de ayuda y de privacidad">
+  <meta property="og:title" content="Neorgon Apps | Hechas para iPhone">
+  <meta property="og:description" content="Conoce las apps para iPhone de Neorgon: dónde está cada una hoy, capturas reales y sus páginas de ayuda y de privacidad">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apps.neorgon.com/">
+  <meta property="og:site_name" content="Neorgon">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neorgon Apps | Hechas para iPhone">
+  <meta name="twitter:description" content="Conoce las apps para iPhone de Neorgon: dónde está cada una hoy, capturas reales y sus páginas de ayuda y de privacidad">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://apps.neorgon.com/">
+  <meta property="og:locale" content="es_CL">
+  <meta name="theme-color" content="#040714">
+  <meta property="og:image" content="https://apps.neorgon.com/og-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Neorgon Apps: apps para iPhone, con ayuda y privacidad">
+  <meta name="twitter:image" content="https://apps.neorgon.com/og-preview.jpg">
+  <!-- Fleet design tokens: canonical, do not redeclare locally (docs/references/new-project-context.md, Design) -->
+  <link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/styles/base.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/catalog.css">
+  <!-- Neorgon Header Kit. Keep after style.css. -->
+  <script>(function(){var m=location.search.match(/[?&]theme=([\w-]+)/)||document.cookie.match(/(?:^|;\s*)neo_theme=([\w-]+)/);if(m&&m[1]!=='default')document.documentElement.dataset.theme=decodeURIComponent(m[1]);})();</script>
+  <link rel="stylesheet" href="css/neorgon-header.css">
+  <link rel="stylesheet" href="css/neorgon-themes.css">
+  <link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/header/season.css">
+  <script defer src="js/neorgon-header.js"></script>
+  <!-- Neorgon Footer Kit. -->
+  <link rel="stylesheet" href="css/neorgon-footer.css">
+  <script defer src="js/neorgon-footer.js"></script>
+  <!-- Neorgon Beacon Kit (vendored). Report-an-issue ladybug in the footer bar: it
+       carries page context to balise.neorgon.com in a URL fragment and the
+       visitor writes there. No form on this page and no request from it.
+       See packages/neorgon-ui/beacon/README.md. -->
+  <meta name="beacon-site" content="apps-site">
+  <link rel="stylesheet" href="css/neorgon-beacon.css">
+  <script defer src="js/neorgon-beacon.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Neorgon Apps",
+    "description": "Las apps para iPhone de Neorgon, con su estado, capturas y páginas de ayuda y de privacidad.",
+    "url": "https://apps.neorgon.com/",
+    "inLanguage": "es",
+    "publisher": { "@type": "Organization", "name": "Neorgon", "url": "https://neorgon.com/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "MobileApplication", "name": "Naninani", "operatingSystem": "iOS 17", "applicationCategory": "EducationalApplication", "url": "https://apps.apple.com/app/id6823867428" } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "MobileApplication", "name": "Amigos de Enerbot", "operatingSystem": "iOS 17", "applicationCategory": "LifestyleApplication", "url": "https://apps.neorgon.com/amigos/" } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "MobileApplication", "name": "Pittari", "operatingSystem": "iOS 18", "applicationCategory": "UtilitiesApplication", "url": "https://apps.neorgon.com/pittari/" } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "MobileApplication", "name": "Kurukuru", "operatingSystem": "iOS 18", "applicationCategory": "LifestyleApplication", "url": "https://hobbyorbit.neorgon.com/" } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "MobileApplication", "name": "HeadPain", "operatingSystem": "iOS 18", "applicationCategory": "HealthApplication", "url": "https://apps.neorgon.com/headpain/" } }
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Ir al contenido</a>
+
+  <!-- Neorgon Header Kit contract. Modes: hub | content | app (see packages/neorgon-ui/header/README.md) -->
+  <header class="header-bar" data-header-mode="content">
+
+    <div class="header-logo">
+      <!-- One link: mark + name go to THIS site's home. The hub icon in
+           .header-right is the only header link to neorgon.com. -->
+      <a href="./" class="header-title-link">
+        <img src="energon-classic-logo.png" class="header-logo-img" alt="">
+        <div class="header-title-wrap">
+          <h1>Neorgon Apps</h1>
+          <div class="header-subtitle">Apps para iPhone, con su ayuda y su privacidad</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <a class="header-home" href="https://neorgon.com/" title="neorgon.com" aria-label="Inicio de Neorgon">
+        <svg class="nh-hub-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M12 4.4 18.58 8.2 18.58 15.8 12 19.6 5.42 15.8 5.42 8.2Z" fill="currentColor" stroke="none"/>
+          <g class="nh-orbit">
+            <path d="M2.47 17.50 A11.0 11.0 0 0 1 14.85 1.37" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/>
+            <path d="M21.53 6.50 A11.0 11.0 0 0 1 9.15 22.63" fill="none" stroke="currentColor" stroke-width="1.05" stroke-linecap="round"/>
+            <circle cx="21.71" cy="6.84" r="1.25" fill="currentColor"/>
+            <circle cx="2.29" cy="17.16" r="1.25" fill="currentColor"/>
+          </g>
+        </svg>
+      </a>
+    </div>
+
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="catalog">
+
+      <section class="intro" aria-labelledby="intro-title">
+        <h2 class="intro__title" id="intro-title">Cinco apps para iPhone, hechas en Neorgon.</h2>
+        <p class="intro__lead">Cada ficha dice dónde está la app hoy, muestra capturas tomadas de la app misma y enlaza su ayuda y su política de privacidad. Ninguna tiene publicidad.</p>
+        <dl class="legend">
+          <div><dt><span class="status status--store">App Store</span></dt><dd>Publicada: cualquiera la descarga.</dd></div>
+          <div><dt><span class="status status--beta">TestFlight interno</span></dt><dd>En pruebas con el equipo de Neorgon; todavía no se puede descargar.</dd></div>
+        </dl>
+        <nav class="jump" aria-label="Apps de esta página">
+          <a href="#naninani"><img src="assets/icons/naninani.webp" alt="" width="28" height="28">Naninani</a>
+          <a href="#amigos"><img src="assets/icons/amigos.webp" alt="" width="28" height="28">Amigos de Enerbot</a>
+          <a href="#pittari"><img src="assets/icons/pittari.webp" alt="" width="28" height="28">Pittari</a>
+          <a href="#kurukuru"><img src="assets/icons/kurukuru.webp" alt="" width="28" height="28">Kurukuru</a>
+          <a href="#headpain"><img src="assets/icons/headpain.webp" alt="" width="28" height="28">HeadPain</a>
+        </nav>
+      </section>
+
+      <article class="app app--naninani" id="naninani" aria-labelledby="naninani-name">
+        <div class="app__info">
+          <div class="app__head">
+            <img class="app__icon" src="assets/icons/naninani.webp" alt="" width="88" height="88">
+            <div>
+              <h2 class="app__name" id="naninani-name">Naninani</h2>
+              <p class="app__tagline">Lector de japonés</p>
+            </div>
+          </div>
+          <p class="app__desc">Lee japonés palabra por palabra: furigana, lecturas y significados, juegos de kana, kanji con su orden de trazos y frases grabadas. Funciona sin conexión, sin cuentas y sin publicidad.</p>
+          <p class="app__state"><span class="status status--store">App Store</span> La 1.1.3 está publicada desde el 6 de noviembre de 2026. La 1.2.0, la primera en español, espera la revisión de Apple desde el 9 de noviembre y se publica sola cuando la aprueben.</p>
+          <ul class="app__links">
+            <li><a class="btn btn--primary" href="https://apps.apple.com/app/id6823867428" rel="noreferrer">Ver en el App Store</a></li>
+            <li><a class="btn btn--secondary" href="https://yomu.neorgon.com/naninani/" rel="noreferrer">Ayuda</a></li>
+            <li><a class="btn btn--secondary" href="https://yomu.neorgon.com/naninani/privacy/" rel="noreferrer">Privacidad</a></li>
+          </ul>
+          <dl class="app__facts">
+            <div><dt>Requiere</dt><dd>iPhone con iOS 17 o posterior; Apple Watch desde la 1.2.0</dd></div>
+            <div><dt>Idiomas</dt><dd>Inglés; español desde la 1.2.0</dd></div>
+            <div><dt>Ayuda y privacidad</dt><dd>En su sitio, <a href="https://yomu.neorgon.com/" rel="noreferrer">yomu.neorgon.com</a>, en inglés</dd></div>
+          </dl>
+        </div>
+        <figure class="shots">
+          <div class="shots__strip" role="region" aria-label="Capturas de Naninani" tabindex="0">
+            <img src="assets/shots/naninani/01-leer.webp" alt="Leer: una oración con furigana y la lectura de cada palabra" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/naninani/02-palabra.webp" alt="Una palabra abierta: significado, kanji, sonidos y ejemplos" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/naninani/03-kana.webp" alt="Juegos de kana: elegir la lectura de un hiragana" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/naninani/04-tarjetas.webp" alt="Tarjetas de kanji del JLPT N5" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/naninani/05-kanji.webp" alt="Un kanji con sus lecturas y su orden de trazos" width="480" height="1043" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Capturas del simulador para la ficha de la 1.2.0, en español.</figcaption>
+        </figure>
+      </article>
+
+      <article class="app app--amigos" id="amigos" aria-labelledby="amigos-name">
+        <div class="app__info">
+          <div class="app__head">
+            <img class="app__icon" src="assets/icons/amigos.webp" alt="" width="88" height="88">
+            <div>
+              <h2 class="app__name" id="amigos-name">Amigos de Enerbot</h2>
+              <p class="app__tagline">La comunidad Energon</p>
+            </div>
+          </div>
+          <p class="app__desc">La app de los miembros de la comunidad Energon: un pase que cambia cada 30 segundos, las juntas con su mapa, los beneficios y los Energones que se ganan con un ++.</p>
+          <p class="app__state"><span class="status status--beta">TestFlight interno</span> Las builds 1 a 5 de la 1.0.0 están en pruebas. La ficha ya está en App Store Connect y la primera revisión espera estas páginas.</p>
+          <ul class="app__links">
+            <li><a class="btn btn--secondary" href="amigos/">Ayuda</a></li>
+            <li><a class="btn btn--secondary" href="amigos/privacy/">Privacidad</a></li>
+          </ul>
+          <dl class="app__facts">
+            <div><dt>Requiere</dt><dd>iPhone con iOS 17 o posterior y una cuenta Neorgon</dd></div>
+            <div><dt>Idioma</dt><dd>Español</dd></div>
+            <div><dt>Contacto</dt><dd><a href="mailto:contact@neorgon.com?subject=Amigos%20de%20Enerbot">contact@neorgon.com</a></dd></div>
+          </dl>
+        </div>
+        <figure class="shots">
+          <div class="shots__strip" role="region" aria-label="Capturas de Amigos de Enerbot" tabindex="0">
+            <img src="assets/shots/amigos/01-inicio.webp" alt="Inicio: la tarjeta de miembro y los accesos al pase, la puerta y los ++" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/amigos/02-juntas.webp" alt="Juntas: las próximas juntas oficiales y las de la comunidad" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/amigos/03-junta.webp" alt="Una junta de la comunidad con su mapa y Cómo llegar" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/amigos/04-puerta.webp" alt="La puerta de una junta: un pase válido de un miembro de prueba" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/amigos/05-cuenta.webp" alt="Yo: privacidad, ayuda, salir de Amigos y eliminar la cuenta" width="480" height="1043" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Capturas del simulador de las builds 3 y 4, con juntas y miembros de prueba.</figcaption>
+        </figure>
+      </article>
+
+      <article class="app app--pittari" id="pittari" aria-labelledby="pittari-name">
+        <div class="app__info">
+          <div class="app__head">
+            <img class="app__icon" src="assets/icons/pittari.webp" alt="" width="88" height="88">
+            <div>
+              <h2 class="app__name" id="pittari-name">Pittari</h2>
+              <p class="app__tagline">Códigos de entradas</p>
+            </div>
+          </div>
+          <p class="app__desc">Encuentra el código de tus entradas en un PDF o una captura, lo redibuja nítido y comprueba que diga lo mismo. Lo muestra a pantalla completa o lo agrega a Apple Wallet.</p>
+          <p class="app__state"><span class="status status--beta">TestFlight interno</span> La build 2 de la 1.0 está en pruebas y ya funciona en un iPhone. La ficha del App Store está en borrador.</p>
+          <ul class="app__links">
+            <li><a class="btn btn--secondary" href="pittari/">Ayuda</a></li>
+            <li><a class="btn btn--secondary" href="pittari/privacy/">Privacidad</a></li>
+          </ul>
+          <dl class="app__facts">
+            <div><dt>Requiere</dt><dd>iPhone con iOS 18 o posterior</dd></div>
+            <div><dt>Idiomas</dt><dd>Inglés y español</dd></div>
+            <div><dt>Ayuda y privacidad</dt><dd>En inglés, como su ficha principal</dd></div>
+          </dl>
+        </div>
+        <figure class="shots">
+          <div class="shots__strip" role="region" aria-label="Capturas de Pittari" tabindex="0">
+            <img src="assets/shots/pittari/01-pass.webp" alt="Una tarjeta de embarque de Santiago a Lima con su código redibujado" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/pittari/02-review.webp" alt="La revisión de un PDF con tres códigos, redibujados junto al original" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/pittari/03-fullscreen.webp" alt="Un código a pantalla completa con el brillo al máximo" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/pittari/04-widgets.webp" alt="La Live Activity y los widgets del próximo pase" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/pittari/05-kept.webp" alt="Pases guardados para Apple Wallet: 4 de 50 lugares usados" width="480" height="1043" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Capturas del simulador para la ficha de la 1.0, en inglés.</figcaption>
+        </figure>
+      </article>
+
+      <article class="app app--kurukuru" id="kurukuru" aria-labelledby="kurukuru-name">
+        <div class="app__info">
+          <div class="app__head">
+            <img class="app__icon" src="assets/icons/kurukuru.webp" alt="" width="88" height="88">
+            <div>
+              <h2 class="app__name" id="kurukuru-name">Kurukuru</h2>
+              <p class="app__tagline">Pasatiempos en órbita</p>
+            </div>
+          </div>
+          <p class="app__desc">Gira la rueda cuando no sabes qué hacer, aprende algo nuevo paso a paso y mira aparecer tus propios ritmos. Sin rachas, sin cuenta y nada vence.</p>
+          <p class="app__state"><span class="status status--beta">TestFlight interno</span> La build 9 de la 1.0.0, candidata al lanzamiento, está en pruebas. La ficha del App Store está en borrador.</p>
+          <ul class="app__links">
+            <li><a class="btn btn--secondary" href="https://hobbyorbit.neorgon.com/" rel="noreferrer">Hobby Orbit en la web</a></li>
+          </ul>
+          <dl class="app__facts">
+            <div><dt>Requiere</dt><dd>iPhone con iOS 18 o posterior; también Apple Watch</dd></div>
+            <div><dt>Idioma</dt><dd>Inglés</dd></div>
+            <div><dt>Ayuda y privacidad</dt><dd>Escritas para hobbyorbit.neorgon.com/kurukuru/, todavía sin publicar</dd></div>
+          </dl>
+        </div>
+        <figure class="shots">
+          <div class="shots__strip" role="region" aria-label="Capturas de Kurukuru" tabindex="0">
+            <img src="assets/shots/kurukuru/01-orbit.webp" alt="Orbit: los pasatiempos girando alrededor del que está en foco" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/kurukuru/02-wheel.webp" alt="La rueda de siete categorías, lista para girar" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/kurukuru/03-checkin.webp" alt="Un check-in: cómo te sentiste, tu energía y qué ayudó" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/kurukuru/04-cycles.webp" alt="Ciclos: a qué hora del día vuelves a cada pasatiempo" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/kurukuru/05-journal.webp" alt="El diario con los check-ins de cada día" width="480" height="1043" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Capturas del simulador para la ficha de la 1.0.0, en inglés.</figcaption>
+        </figure>
+      </article>
+
+      <article class="app app--headpain" id="headpain" aria-labelledby="headpain-name">
+        <div class="app__info">
+          <div class="app__head">
+            <img class="app__icon" src="assets/icons/headpain.webp" alt="" width="88" height="88">
+            <div>
+              <h2 class="app__name" id="headpain-name">HeadPain</h2>
+              <p class="app__tagline">Diario de dolor de cabeza</p>
+            </div>
+          </div>
+          <p class="app__desc">Registra un dolor de cabeza en un toque, marca dónde duele en una cabeza 3D y lleva al médico un informe claro. Es un diario, no un diagnóstico.</p>
+          <p class="app__state"><span class="status status--beta">TestFlight interno</span> La build 5 de la 1.0.0 está en pruebas desde el 8 de noviembre de 2026. La revisión del App Store todavía no empieza.</p>
+          <ul class="app__links">
+            <li><a class="btn btn--secondary" href="headpain/">Ayuda</a></li>
+            <li><a class="btn btn--secondary" href="headpain/privacy/">Privacidad</a></li>
+            <li><a class="btn btn--secondary" href="https://headpain.neorgon.com/" rel="noreferrer">HeadPain en la web</a></li>
+          </ul>
+          <dl class="app__facts">
+            <div><dt>Requiere</dt><dd>iPhone con iOS 18 o posterior</dd></div>
+            <div><dt>Idioma</dt><dd>Inglés, y su ayuda y privacidad también</dd></div>
+          </dl>
+        </div>
+        <figure class="shots">
+          <div class="shots__strip" role="region" aria-label="Capturas de HeadPain" tabindex="0">
+            <img src="assets/shots/headpain/01-3d.webp" alt="Look in 3D: la cabeza de frente con los lugares que dolieron" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/headpain/02-episode.webp" alt="Un episodio de migraña con su mapa y cómo cambió la intensidad" width="480" height="1043" loading="lazy" decoding="async">
+            <img src="assets/shots/headpain/03-usual.webp" alt="Look in 3D con la forma habitual de una migraña" width="480" height="1043" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Capturas del simulador con un diario de demostración, tomadas al probar la build 5.</figcaption>
+        </figure>
+      </article>
+
+      <section class="terms" aria-labelledby="terms-title">
+        <h2 class="terms__title" id="terms-title">Acuerdos</h2>
+        <p>Cada app tiene su ayuda y su política de privacidad: las de Naninani viven en su sitio, las de Kurukuru están escritas para el suyo y aún no se publican, y las de las otras tres están en este sitio. Ninguna tiene términos propios: en el App Store rige la <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" rel="noreferrer">licencia estándar de Apple</a>.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="neo-footer" data-footer-mode="minimal">
+    <p>Las capturas salen del simulador de cada app; ninguna es una maqueta.</p>
+  </footer>
+
+</body>
+</html>

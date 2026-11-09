@@ -1,0 +1,36 @@
+---
+config:
+  theme: base
+  themeVariables:
+    primaryColor: "#0f172a"
+    primaryTextColor: "#e2e8f0"
+    primaryBorderColor: "#0063e5"
+    lineColor: "#38bdf8"
+    secondaryColor: "#1e293b"
+    tertiaryColor: "#1e293b"
+    clusterBkg: "#f0f7ff"
+    clusterBorder: "#bfdbfe"
+    edgeLabelBackground: "#e8f0ff"
+    mainBkg: "#0f172a"
+    nodeBorder: "#0063e5"
+    titleColor: "#1e1b4b"
+    fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif"
+    fontSize: "13px"
+---
+flowchart TB
+    User([Visitor or App Review]) --> HTML["index.html\nCatalog in Spanish, Header and Footer Kits"]
+
+    subgraph App["Static site (no build step)"]
+        HTML --> Assets["assets/\nicons from packages/app-icons,\nsimulator screenshots as WebP"]
+        HTML --> Docs["amigos/ pittari/ headpain/\nhelp + privacy pages, no script"]
+        Docs --> DocCSS["css/doc.css\nthe app's hue from its icon"]
+    end
+
+    subgraph Repos["App repos (read only)"]
+        Drafts["docs/app-store/&lt;version&gt;/pages/\nAmigos and Pittari drafts"]
+        Shots["docs/app-store/&lt;version&gt;/screenshots/\nand docs/screenshots/"]
+    end
+
+    Drafts -->|"tools/import-pages.py"| Docs
+    Shots -->|"resized by hand, 480 px WebP"| Assets
+    HTML -->|"links"| Sites["yomu.neorgon.com/naninani/\nhobbyorbit.neorgon.com\nheadpain.neorgon.com"]
