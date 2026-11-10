@@ -9,7 +9,7 @@ Run it again after the app's session revises a draft:
 
     python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages
     python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages
-    python3 tools/import-pages.py chokon ../robodoll-ios/docs/app-store/1.0.0/pages
+    python3 tools/import-pages.py enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages
 
 An app in several languages lists them under 'langs', its App Store record's
 primary language first. That language's drafts sit at the top of the folder
@@ -43,8 +43,8 @@ APPS = {
         'all': 'All apps', 'crumb': 'All Neorgon apps', 'related': 'Related pages',
         'skip': 'Skip to content', 'part': 'Part of Neorgon', 'skin': 'brass',
     },
-    'chokon': {
-        'name': 'Chokon', 'skin': '',
+    'enerbot-doll': {
+        'name': 'Enerbot Doll', 'skin': '',
         'langs': {
             'es': {
                 'help': 'Ayuda', 'privacy': 'Privacidad', 'policy': 'Política de privacidad',
@@ -58,7 +58,7 @@ APPS = {
                 'skip': 'Skip to content', 'part': 'Part of Neorgon',
                 'native': 'English', 'langs': 'Languages',
             },
-            # Written without a native speaker's read; used only if Chokon ships Japanese.
+            # Written without a native speaker's read; used only if Enerbot Doll ships Japanese.
             'ja': {
                 'help': 'ヘルプ', 'privacy': 'プライバシー', 'policy': 'プライバシーポリシー',
                 'all': 'アプリ一覧', 'crumb': 'Neorgon のアプリ一覧', 'related': '関連ページ',
