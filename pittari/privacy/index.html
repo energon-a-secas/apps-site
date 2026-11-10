@@ -31,7 +31,7 @@
   </header>
   <main id="main" class="doc-main" tabindex="-1">
     <p class="crumb"><a href="../../">&larr; All Neorgon apps</a></p>
-    <p class="kicker">Pittari for iPhone · 8 November 2026</p>
+    <p class="kicker">Pittari for iPhone · 9 November 2026</p>
     <h1>Your tickets.<br>Your iPhone.</h1>
     <p class="lead">Privacy policy for Pittari, its widgets, its Control Center control and its Share extension, developed by Neorgon.</p>
     <div class="card">
@@ -58,8 +58,8 @@
         <li><strong>Linking with Apple.</strong> You link Pittari with Sign in with Apple. Pittari asks Apple for no name and no email. Apple gives Pittari an identifier for your Apple Account; the backend stores only a keyed hash of it, never the identifier itself and never an Apple token.</li>
         <li><strong>This iPhone.</strong> Each request carries an App Attest proof, Apple’s way to show it comes from Pittari on a genuine device. The backend keeps that device key’s public part, a counter and when it was last used, and which account it is linked to (up to five iPhones).</li>
         <li><strong>Signing a pass.</strong> To sign a pass for Wallet, Pittari sends its text (the pass.json file: title, dates, seat and other fields, and what the code says) with the fingerprints of its files, never its pictures. The backend checks it, signs it and discards it at once. It is never stored or logged.</li>
-        <li><strong>Kept passes.</strong> Each pass you add is kept for a year, 50 at most, so you can restore it on another iPhone or add it to Wallet again. Before it leaves your iPhone, Pittari seals the copy (AES-256-GCM) with a key that stays in your iCloud Keychain. The backend keeps the sealed copy, its size and its dates; Neorgon cannot open it.</li>
-        <li><strong>Limits.</strong> To keep the service fair, the backend counts how many passes an account and a device sign each hour and each day.</li>
+        <li><strong>Kept passes.</strong> Each pass you add is kept for a year, 50 at most, so you can restore it on another iPhone or add it to Wallet again. Before it leaves your iPhone, Pittari seals the copy (AES-256-GCM) with a key that stays in your iCloud Keychain. The backend keeps the sealed copy, its size and its dates; Neorgon cannot open it. If the backend ever loses a copy, the iPhone that holds the pass seals it and sends it again by itself.</li>
+        <li><strong>Limits.</strong> To keep the service fair, the backend counts how many passes an account and a device sign each hour and each day, and how many copies an account keeps again each day.</li>
       </ul>
       <p>Pittari’s backend runs on Convex (Convex, Inc.), which hosts this data for Neorgon and processes it only to run the backend. Nothing in it is used for advertising, sold or shared with anyone else. A pass in Wallet is Apple’s to handle, under Apple’s terms.</p>
     </section>
@@ -81,7 +81,7 @@
     <section id="remove" aria-labelledby="remove-title">
       <h2 id="remove-title">Keeping and removing data</h2>
       <p>A pass stays on your iPhone until you delete it: Delete Pass on the pass, or Delete All Passes in About. Deleting Pittari removes all its passes and pictures from your iPhone. Your iCloud or computer backups may hold copies according to your own backup settings; manage those through Apple or your computer.</p>
-      <p>A kept pass is deleted from the backend a year after you add it or keep it another year, or at once when you delete it in About, Kept Passes. An iPhone unused for 400 days is removed. About, Apple Wallet, also unlinks this iPhone or the others.</p>
+      <p>A kept pass is deleted from the backend a year after you add it or keep it another year, or at once when you delete it in About, Kept Passes; until its year would have ended, the backend then keeps only its random id, so your other iPhones don’t keep it again. An iPhone unused for 400 days is removed. About, Apple Wallet, also unlinks this iPhone or the others.</p>
       <p><strong>Delete Account</strong>, in About, deletes everything the backend holds for you: every kept pass, the account and its linked iPhones. It also asks Apple to revoke Pittari’s Sign in with Apple token. If you stop using Sign in with Apple with Pittari in your Apple Account settings, Apple tells Pittari, and the account is deleted the same way. Your passes stay in Pittari on your iPhone and in Wallet.</p>
       <p>Neorgon cannot open your kept passes, so it can’t read, retrieve or restore them for you. Without your iCloud Keychain key they can’t be opened at all.</p>
     </section>
