@@ -9,9 +9,19 @@ Run it again after the app's session revises a draft:
 
     python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages
     python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages
+    python3 tools/import-pages.py chokon ../robodoll-ios/docs/app-store/1.0.0/pages
 
-It refuses a draft whose canonical URL is not this site's /<app>/ page, so a
-draft written for another host cannot land here by mistake.
+An app in several languages lists them under 'langs', its App Store record's
+primary language first. That language's drafts sit at the top of the folder
+and land at /<app>/; each other language's sit in <folder>/<lang>/ and land
+at /<app>/<lang>/, the URL that language's App Store localization lists. A
+language with no draft yet is skipped. Once two languages are in, every page
+names the others: hreflang links in its head, and their own names beside the
+way back to the catalog (the header keeps its two tabs).
+
+It refuses a draft whose canonical URL is not this site's page for it, so a
+draft written for another host or another language cannot land here by
+mistake.
 """
 import html
 import re
@@ -33,6 +43,30 @@ APPS = {
         'all': 'All apps', 'crumb': 'All Neorgon apps', 'related': 'Related pages',
         'skip': 'Skip to content', 'part': 'Part of Neorgon', 'skin': 'brass',
     },
+    'chokon': {
+        'name': 'Chokon', 'skin': '',
+        'langs': {
+            'es': {
+                'help': 'Ayuda', 'privacy': 'Privacidad', 'policy': 'Política de privacidad',
+                'all': 'Todas las apps', 'crumb': 'Todas las apps de Neorgon', 'related': 'Páginas relacionadas',
+                'skip': 'Ir al contenido', 'part': 'Parte de Neorgon',
+                'native': 'Español', 'langs': 'Idiomas',
+            },
+            'en': {
+                'help': 'Help', 'privacy': 'Privacy', 'policy': 'Privacy policy',
+                'all': 'All apps', 'crumb': 'All Neorgon apps', 'related': 'Related pages',
+                'skip': 'Skip to content', 'part': 'Part of Neorgon',
+                'native': 'English', 'langs': 'Languages',
+            },
+            # Written without a native speaker's read; used only if Chokon ships Japanese.
+            'ja': {
+                'help': 'ヘルプ', 'privacy': 'プライバシー', 'policy': 'プライバシーポリシー',
+                'all': 'アプリ一覧', 'crumb': 'Neorgon のアプリ一覧', 'related': '関連ページ',
+                'skip': '本文へスキップ', 'part': 'Neorgon が運営',
+                'native': '日本語', 'langs': '言語',
+            },
+        },
+    },
 }
 
 CSP = ("default-src 'none'; style-src 'self' https://cdn.neorgon.org/v1.0.0/; img-src 'self'; "
@@ -46,17 +80,22 @@ def one(pattern, text, what, path):
     return m.group(1).strip()
 
 
-def page(app, cfg, draft, privacy):
+def page(app, cfg, draft, privacy, sub='', editions=()):
+    """One page. `sub` is '' or '<lang>/'; `editions` lists (lang, sub, native name)
+    for every language the app has drafts in, or nothing for a one-language app."""
+    if not draft.is_file():
+        sys.exit(f'{draft}: missing')
     text = draft.read_text(encoding='utf-8')
     title = one(r'<title>(.*?)</title>', text, 'title', draft)
     # The fleet's meta descriptions end without a period; the draft's words are kept.
     desc = one(r'<meta name="description" content="(.*?)">', text, 'description', draft).rstrip('.')
     canonical = one(r'<link rel="canonical" href="(.*?)">', text, 'canonical', draft)
-    want = f'https://apps.neorgon.com/{app}/' + ('privacy/' if privacy else '')
+    tail = 'privacy/' if privacy else ''
+    want = f'https://apps.neorgon.com/{app}/{sub}{tail}'
     if canonical != want:
         sys.exit(f'{draft}: canonical is {canonical}, expected {want}')
     main = one(r'<main id="main" tabindex="-1">(.*?)</main>', text, '<main id="main">', draft)
-    root = '../../' if privacy else '../'
+    root = '../' * (1 + sub.count('/') + (1 if privacy else 0))
     home = '../' if privacy else './'
     here_help = '' if privacy else ' aria-current="page"'
     here_priv = ' aria-current="page"' if privacy else ''
@@ -65,6 +104,20 @@ def page(app, cfg, draft, privacy):
                     else f'<a href="privacy/">{cfg["policy"]}</a>')
     name = html.escape(cfg['name'])
     skin = f' data-header-skin="{cfg["skin"]}"' if cfg['skin'] else ''
+    # Search engines get every language's copy of this page; readers get the
+    # other languages, each in its own name and marked with its own lang.
+    alternates = ''.join(
+        f'\n  <link rel="alternate" hreflang="{lang}" href="https://apps.neorgon.com/{app}/{s}{tail}">'
+        for lang, s, _ in editions)
+    if editions:
+        alternates += f'\n  <link rel="alternate" hreflang="x-default" href="https://apps.neorgon.com/{app}/{tail}">'
+    languages = ''.join(
+        f'<a href="/{app}/{s}{tail}" hreflang="{lang}" lang="{lang}">{html.escape(native)}</a>'
+        for lang, s, native in editions if lang != cfg['lang'])
+    crumb = f'<p class="crumb"><a href="{root}">&larr; {cfg["crumb"]}</a></p>'
+    if languages:
+        crumb = (f'<div class="crumb-row">{crumb}'
+                 f'<nav class="doc-langs" aria-label="{cfg["langs"]}">{languages}</nav></div>')
     return f'''<!doctype html>
 <html lang="{cfg["lang"]}">
 <head>
@@ -75,7 +128,7 @@ def page(app, cfg, draft, privacy):
   <meta name="referrer" content="no-referrer">
   <title>{title}</title>
   <meta name="description" content="{desc}">
-  <link rel="canonical" href="{canonical}">
+  <link rel="canonical" href="{canonical}">{alternates}
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#040714">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -97,7 +150,7 @@ def page(app, cfg, draft, privacy):
     <nav class="doc-nav" aria-label="{name}"><a href="{home}"{here_help}>{cfg["help"]}</a><a href="{priv_href}"{here_priv}>{cfg["privacy"]}</a></nav>
   </header>
   <main id="main" class="doc-main" tabindex="-1">
-    <p class="crumb"><a href="{root}">&larr; {cfg["crumb"]}</a></p>
+    {crumb}
     {main}
   </main>
   <footer class="neo-footer doc-footer" data-footer-mode="minimal"><div class="neo-footer-inner"><span>&copy; 2026 Neorgon</span><nav class="doc-related" aria-label="{cfg["related"]}">{footer_first}<a href="{root}">{cfg["all"]}</a><a href="https://neorgon.com/" rel="noreferrer">{cfg["part"]}</a></nav></div></footer>
@@ -106,16 +159,40 @@ def page(app, cfg, draft, privacy):
 '''
 
 
+def languages_of(app, pages):
+    """(lang, labels, sub, draft folder) for each language the app has drafts in."""
+    entry = APPS[app]
+    if 'langs' not in entry:
+        return [(entry['lang'], entry, '', pages)]
+    found = []
+    for i, (lang, labels) in enumerate(entry['langs'].items()):
+        folder = pages / lang if i else pages
+        if not (folder / 'index.html').is_file():
+            if i == 0:
+                sys.exit(f'{folder}: no draft in {lang}, the first language of {app}')
+            continue
+        cfg = {'name': entry['name'], 'skin': entry['skin'], 'lang': lang, **labels}
+        found.append((lang, cfg, f'{lang}/' if i else '', folder))
+    return found
+
+
 def main():
     if len(sys.argv) != 3 or sys.argv[1] not in APPS:
         sys.exit(__doc__)
     app, pages = sys.argv[1], Path(sys.argv[2])
-    cfg = APPS[app]
-    for privacy in (False, True):
-        draft = pages / ('privacy/index.html' if privacy else 'index.html')
-        out = SITE / app / ('privacy/index.html' if privacy else 'index.html')
+    found = languages_of(app, pages)
+    editions = [(lang, sub, cfg['native']) for lang, cfg, sub, _ in found] if len(found) > 1 else []
+    # Every draft is checked before any page is written, so a refused draft
+    # leaves the site as it was rather than half imported.
+    pending = []
+    for lang, cfg, sub, folder in found:
+        for privacy in (False, True):
+            draft = folder / ('privacy/index.html' if privacy else 'index.html')
+            out = SITE / app / sub / ('privacy/index.html' if privacy else 'index.html')
+            pending.append((draft, out, page(app, cfg, draft, privacy, sub, editions)))
+    for draft, out, text in pending:
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(page(app, cfg, draft, privacy), encoding='utf-8')
+        out.write_text(text, encoding='utf-8')
         print(f'{draft} -> {out.relative_to(SITE)}')
 
 

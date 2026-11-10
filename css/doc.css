@@ -52,6 +52,14 @@
 .doc-main .crumb a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-secondary); text-decoration: none; }
 .doc-main .crumb a:hover { color: var(--text-primary); }
 
+/* An app in several languages names the others beside the way back, each in
+   its own words; the header keeps its two tabs. */
+.doc-main .crumb-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--space-6); margin: 0 0 var(--space-6); }
+.doc-main .crumb-row .crumb { margin: 0; }
+.doc-langs { display: flex; flex-wrap: wrap; gap: 0 var(--space-4); }
+.doc-main .doc-langs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-secondary); text-decoration: none; font-size: var(--text-sm); font-weight: 600; }
+.doc-main .doc-langs a:hover { color: var(--text-primary); }
+
 .doc-related { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); align-items: center; }
 .doc-related a { display: inline-flex; align-items: center; min-height: 44px; }
 
@@ -64,6 +72,6 @@
 }
 @media print {
   .doc { background: none; }
-  .doc-header, .doc-footer, .skip-link, .doc-main .contents { display: none; }
+  .doc-header, .doc-footer, .skip-link, .doc-main .contents, .doc-langs { display: none; }
   .doc-main { width: 100%; padding: 0; }
 }

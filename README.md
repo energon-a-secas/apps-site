@@ -72,6 +72,7 @@ python3 -m http.server 8904
 |---|---|
 | An app's state (a new build, a submission, a release) | its `<article>` in `index.html`, the `app__state` line |
 | Amigos or Pittari revised their pages | `python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages` (or `pittari ../qrpass-ios/docs/app-store/1.0/pages`) |
+| An app's pages in more than one language | its `langs` in `tools/import-pages.py`, the App Store record's primary language first; each other language's drafts go in `<pages>/<lang>/` and land at `/<app>/<lang>/` |
 | HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written from `projects/headpain-ios` at build 5. The face scan on its `face-scan` branch needs a new version before it ships |
 | New screenshots | resize to 480 px wide WebP into `assets/shots/<app>/`, keep the alt text true |
 | An icon changed | render the app's `AppIcon.icon` with Icon Composer's `ictool` (see `packages/app-icons`) into `assets/icons/` |
