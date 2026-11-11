@@ -22,12 +22,12 @@ flowchart TB
 
     subgraph App["Static site (no build step)"]
         HTML --> Assets["assets/\nicons from packages/app-icons,\nsimulator screenshots as WebP"]
-        HTML --> Docs["amigos/ pittari/ headpain/\nhelp + privacy pages, no script"]
+        HTML --> Docs["amigos/ pittari/ headpain/ enerbot-doll/\nhelp + privacy pages, no script"]
         Docs --> DocCSS["css/doc.css\nthe app's hue from its icon"]
     end
 
     subgraph Repos["App repos (read only)"]
-        Drafts["docs/app-store/&lt;version&gt;/pages/\nAmigos and Pittari drafts"]
+        Drafts["docs/app-store/&lt;version&gt;/pages/\nAmigos, Pittari and Enerbot Doll drafts"]
         Shots["docs/app-store/&lt;version&gt;/screenshots/\nand docs/screenshots/"]
     end
 

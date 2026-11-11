@@ -31,7 +31,7 @@ Neorgon's iPhone apps, with their help and privacy pages
 ## Overview
 
 The catalog of the iPhone apps Neorgon makes: Naninani, Amigos de Enerbot,
-Pittari, Kurukuru and HeadPain. Each card shows the app's icon, where it
+Pittari, Kurukuru, HeadPain and Enerbot Doll. Each card shows the app's icon, where it
 really stands (App Store or TestFlight, read from the app's own release docs),
 screenshots taken from the app and links to its help and privacy policy. An
 app with a site of its own keeps its pages there; the others keep them here, at
@@ -43,8 +43,8 @@ app with a site of its own keeps its pages there; the others keep them here, at
 
 ## Features
 
-- **One card per app** -- icon, one line, real state, five screenshots in a strip that scrolls, and its links
-- **Help and privacy pages** -- `/amigos/`, `/pittari/` and `/headpain/`, each with `privacy/`, in the app's language
+- **One card per app** -- icon, one line, real state, up to five screenshots in a strip that scrolls, and its links
+- **Help and privacy pages** -- `/amigos/`, `/pittari/`, `/headpain/` and `/enerbot-doll/`, each with `privacy/`, in the app's language
 - **No script on the app pages** -- the kits' header and footer styles with static markup and a CSP that allows only this site and the CDN stylesheet, so a policy page sends nothing anywhere
 - **Drafts stay the app's** -- `tools/import-pages.py` wraps an app session's drafted pages in this site's shell without touching their words
 
@@ -71,7 +71,7 @@ python3 -m http.server 8904
 | What changed | Where to edit |
 |---|---|
 | An app's state (a new build, a submission, a release) | its `<article>` in `index.html`, the `app__state` line |
-| Amigos or Pittari revised their pages | `python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages` (or `pittari ../qrpass-ios/docs/app-store/1.0/pages`) |
+| Amigos, Pittari or Enerbot Doll revised their pages | `python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages` (or `pittari ../qrpass-ios/docs/app-store/1.0/pages`, or `enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages`) |
 | An app's pages in more than one language | its `langs` in `tools/import-pages.py`, the App Store record's primary language first; each other language's drafts go in `<pages>/<lang>/` and land at `/<app>/<lang>/` |
 | HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written from `projects/headpain-ios` at build 5. The face scan on its `face-scan` branch needs a new version before it ships |
 | New screenshots | resize to 480 px wide WebP into `assets/shots/<app>/`, keep the alt text true |
@@ -93,6 +93,7 @@ apps-site/
 ├── amigos/                 # Amigos de Enerbot help + privacy/ (Spanish)
 ├── pittari/                # Pittari support + privacy/ (English)
 ├── headpain/               # HeadPain support + privacy/ (English)
+├── enerbot-doll/           # Enerbot Doll help + privacy/ (Spanish)
 ├── css/
 │   ├── style.css           # Fleet baseline and the site accent
 │   ├── catalog.css         # The catalog's cards and screenshot strips

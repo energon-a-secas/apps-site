@@ -7,6 +7,7 @@
 .app--pittari  { --app-hue: #f0ae49; --app-ink: #f6c97f; }
 .app--kurukuru { --app-hue: #3445ae; --app-ink: #a7b3ff; }
 .app--headpain { --app-hue: #41826d; --app-ink: #8fd3b8; }
+.app--enerbot-doll { --app-hue: #17a2b8; --app-ink: #8fdbe6; }
 
 .catalog {
   --pad: var(--space-6);
