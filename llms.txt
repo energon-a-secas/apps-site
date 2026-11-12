@@ -13,7 +13,7 @@
 - Pittari: finds the codes in ticket PDFs and screenshots, redraws them sharp, shows them full screen or adds them to Apple Wallet. Waiting for App Review since 2026-11-11, with build 7 in internal TestFlight; approval releases it. Support and privacy, in English: https://apps.neorgon.com/pittari/ and https://apps.neorgon.com/pittari/privacy/
 - Kurukuru (Hobby Orbit): a hobby wheel, learning in steps and your own rhythms, on iPhone and Apple Watch. In internal TestFlight. Support and privacy, in English, on its own site: https://hobbyorbit.neorgon.com/kurukuru/ and https://hobbyorbit.neorgon.com/kurukuru/privacy/
 - HeadPain: a headache diary with a 3D head map and a report for a doctor. In internal TestFlight. Support and privacy, in English: https://apps.neorgon.com/headpain/ and https://apps.neorgon.com/headpain/privacy/
-- Enerbot Doll (it was Chokon): Enerbot as a robot doll you pose and keep on your widgets; a poke makes him react, and touches and days unlock wigs and accessories. 1.0.0 passed App Review and was released on 2026-11-11; its App Store page had not appeared yet that night. Help and privacy, in Spanish: https://apps.neorgon.com/enerbot-doll/ and https://apps.neorgon.com/enerbot-doll/privacy/
+- Enerbot Doll (it was Chokon): Enerbot as a robot doll you pose and keep on your widgets; a poke makes him react, and touches and days unlock wigs and accessories. On the App Store (1.0.0) since 2026-11-11. Help and privacy, in Spanish: https://apps.neorgon.com/enerbot-doll/ and https://apps.neorgon.com/enerbot-doll/privacy/
 
 ## Notes
 
