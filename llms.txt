@@ -8,7 +8,7 @@
 
 ## Apps
 
-- Naninani: a Japanese reader. On the App Store (1.1.3); 1.2.0 is in review. Help and privacy: https://yomu.neorgon.com/naninani/ and https://yomu.neorgon.com/naninani/privacy/
+- Naninani: a Japanese reader. On the App Store (1.2.0) since 2026-11-09; first published 2026-11-06. Help and privacy: https://yomu.neorgon.com/naninani/ and https://yomu.neorgon.com/naninani/privacy/
 - Amigos de Enerbot: the Energon community's member app (pass, juntas, perks, Energones). In internal TestFlight. Help and privacy, in Spanish: https://apps.neorgon.com/amigos/ and https://apps.neorgon.com/amigos/privacy/
 - Pittari: finds the codes in ticket PDFs and screenshots, redraws them sharp, shows them full screen or adds them to Apple Wallet. On the App Store (1.0) since 2026-11-12. Support and privacy, in English: https://apps.neorgon.com/pittari/ and https://apps.neorgon.com/pittari/privacy/
 - Kurukuru (Hobby Orbit): a hobby wheel, learning in steps and your own rhythms, on iPhone and Apple Watch. In internal TestFlight. Support and privacy, in English, on its own site: https://hobbyorbit.neorgon.com/kurukuru/ and https://hobbyorbit.neorgon.com/kurukuru/privacy/
