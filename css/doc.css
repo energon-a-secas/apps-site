@@ -4,11 +4,10 @@
    body class, which sets the app's own hue from its icon. */
 
 .doc { --app-hue: var(--accent); --app-ink: var(--accent-bright); }
+/* Every other app's hue comes from css/apps.css (generated from data/apps.json),
+   linked after this file. Amigos' pages keep their own line while its first
+   version is in App Review: amigos/ is frozen and does not link apps.css. */
 .doc--amigos { --app-hue: #8c37a8; --app-ink: #d9a0ec; }
-.doc--pittari { --app-hue: #f0ae49; --app-ink: #f6c97f; }
-.doc--headpain { --app-hue: #41826d; --app-ink: #8fd3b8; }
-.doc--enerbot-doll { --app-hue: #17a2b8; --app-ink: #8fdbe6; }
-.doc--celular-listo { --app-hue: #0b6b63; --app-ink: #7fd6cb; }
 
 /* A soft wash of the app's hue behind the header, so each app's pages read as
    that app's without changing the fleet's dark shell. */
@@ -76,4 +75,111 @@
   .doc { background: none; }
   .doc-header, .doc-footer, .skip-link, .doc-main .contents, .doc-langs { display: none; }
   .doc-main { width: 100%; padding: 0; }
+}
+
+/* ── The app page shell ───────────────────────────────────────
+   Written by tools/import-pages.py on every page but Amigos' (frozen, so the
+   rules above stay as they were for it). A crumb back to the catalog, the head
+   at up to 46rem, then the body at 34rem (65 to 75 characters a line). The
+   contents sit in a sticky rail from 1100px and in a row of chips below that. */
+#main.doc-main.doc-main--shell { width: min(100% - 40px, 46rem); padding-top: 8px; }
+.doc-main--shell > .neo-crumb, .doc-main--shell > .neo-crumb-row { margin-bottom: clamp(12px, 3vw, 32px); }
+.doc-main--shell .doc-langs a { min-height: 44px; }
+.doc-main--shell .kicker { align-items: flex-start; line-height: 1.5; }
+.doc-main--shell .kicker::before { margin-top: calc(0.75em - 4px); }
+.doc-main--shell .lead { max-width: 40rem; }
+.doc-body { max-width: 34rem; }
+
+/* A published app's page opens with its icon and the way to install it. */
+.doc-head--hero { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 18px; align-items: center; }
+.doc-head--hero > * { grid-column: 1 / -1; }
+.doc-head--hero > .doc-hero__icon { grid-column: 1; grid-row: 1; width: 72px; height: 72px; border-radius: 22.5%;
+  filter: drop-shadow(0 10px 22px color-mix(in oklab, var(--app-hue) 45%, transparent)); }
+.doc-head--hero > .kicker { grid-column: 2; grid-row: 1; }
+.doc-install { margin: var(--space-2) 0 var(--space-4); }
+.doc-main a.doc-install__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 14px;
+  background: var(--app-ink);
+  color: #0a0c14;
+  font-weight: 700;
+  text-decoration: none;
+}
+.doc-main a.doc-install__cta:hover { background: color-mix(in oklab, var(--app-ink) 80%, #fff); text-decoration: none; }
+.doc-install__cta svg { flex: none; }
+
+/* The draft's contents: a row of chips that scrolls sideways. */
+.doc-main--shell .contents {
+  flex-wrap: nowrap;
+  gap: var(--space-2);
+  overflow-x: auto;
+  margin: var(--space-6) 0 var(--space-2);
+  padding: var(--space-3) 0;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+}
+.doc-main--shell .contents::-webkit-scrollbar { display: none; }
+.doc-main--shell .contents::after { content: ""; flex: 0 0 24px; }
+.doc-main--shell .contents a {
+  flex: none;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+.doc-main--shell .contents a:hover { background: rgb(255 255 255 / 11%); }
+@media (pointer: coarse) {
+  .doc-main--shell .contents a { min-height: 44px; }
+}
+
+/* Questions written as a definition list. */
+.doc-body dl { margin: var(--space-4) 0 var(--space-6); }
+.doc-body dt { margin-top: var(--space-6); color: var(--text-primary); font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.doc-body dt:first-child { margin-top: 0; }
+.doc-body dd { margin: var(--space-1) 0 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.75; }
+
+@media (min-width: 1100px) {
+  #main.doc-main.doc-main--shell {
+    width: min(100% - 64px, calc(13rem + 56px + 46rem));
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 46rem);
+    column-gap: 56px;
+    align-content: start;
+  }
+  .doc-main--shell > * { grid-column: 2; }
+  .doc-main--shell .doc-shell { display: contents; }
+  .doc-main--shell .doc-shell > .contents {
+    grid-column: 1;
+    grid-row: 3;
+    position: sticky;
+    top: 80px;
+    align-self: start;
+    flex-direction: column;
+    gap: 2px;
+    margin: var(--space-6) 0 0;
+    padding: 0 0 0 var(--space-3);
+    overflow: visible;
+    border: 0;
+    border-left: 1px solid var(--border);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .doc-main--shell .doc-shell > .contents::after { content: none; }
+  .doc-main--shell .doc-shell > .contents a { min-height: 36px; padding: 0 var(--space-2); background: none; border-radius: var(--radius-sm); color: var(--text-secondary); }
+  .doc-main--shell .doc-shell > .contents a:hover { background: var(--surface-2); color: var(--text-primary); }
+  .doc-main--shell .doc-body { grid-column: 2; grid-row: 3; }
+  .doc-head--hero > .doc-hero__icon { width: 88px; height: 88px; }
+}
+
+@media print {
+  #main.doc-main.doc-main--shell { display: block; width: 100%; }
+  .doc-main--shell .doc-shell { display: block; }
+  .doc-body { max-width: none; }
+  .doc-install, .neo-crumb, .neo-crumb-row { display: none; }
 }
