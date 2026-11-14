@@ -2,7 +2,7 @@
 
 # Neorgon Apps
 
-Neorgon's iPhone apps, with their help and privacy pages
+Neorgon's apps for iPhone and Android, with their help and privacy pages
 
 [![Live][badge-site]][url-site]
 [![HTML5][badge-html]][url-html]
@@ -30,16 +30,18 @@ Neorgon's iPhone apps, with their help and privacy pages
 
 ## Overview
 
-The catalog of the iPhone apps Neorgon makes: Naninani, Amigos de Enerbot,
-Pittari, Kurukuru, HeadPain and Enerbot Doll. Each card shows the app's icon, where it
-really stands (App Store or TestFlight, read from the app's own release docs),
-screenshots taken from the app and links to its help and privacy policy. An
-app with a site of its own keeps its pages there; the others keep them here, at
-`/<app>/` and `/<app>/privacy/`, the URLs their App Store Connect records list.
+The catalog of the apps Neorgon makes: Pittari, Naninani and Enerbot Doll on the
+App Store, and Kurukuru, HeadPain, Amigos de Enerbot and Celular Listo coming
+soon. Each app gets a band in its own hue with its icon, its promise, its
+category, a way to get it (the App Store, its web version, or a note to be
+told when it ships) and its screenshots, plus links to its help and privacy
+policy. An app with a site of its own keeps those pages there (Naninani on
+yomu.neorgon.com, Kurukuru on hobbyorbit.neorgon.com); the others keep them
+here, at `/<app>/` and `/<app>/privacy/`, the URLs their store records list.
 
-Celular Listo, an Android app that is not on Google Play yet, keeps its help
-and privacy pages here as well (`/celular-listo/`, English under `en/`). It
-gets a card when it is published.
+Everything the catalog says about an app comes from one file, `data/apps.json`,
+and the page shows public status only. Builds, reviews and release dates live
+in each app's own repo.
 
 **Live:** apps.neorgon.com
 
@@ -47,8 +49,9 @@ gets a card when it is published.
 
 ## Features
 
-- **One card per app** -- icon, one line, real state, up to five screenshots in a strip that scrolls, and its links
-- **Help and privacy pages** -- `/amigos/`, `/pittari/`, `/headpain/`, `/enerbot-doll/` and `/celular-listo/`, each with `privacy/`, in the app's language
+- **One band per app** -- icon, promise, category, platform and traits, one action, help and privacy links, and a stage of screenshots that scrolls sideways
+- **Built from data** -- `tools/build-catalog.py` writes the catalog, its JSON-LD, the 404 page's app list, `css/apps.css`, `llms.txt` and `sitemap.xml` from `data/apps.json`; `--check` fails when a committed output differs
+- **Help and privacy pages** -- `/pittari/`, `/headpain/`, `/enerbot-doll/`, `/celular-listo/` (English under `en/`) and `/amigos/`, each with `privacy/`, in the app's language, with a crumb back to the catalog and the family shelf at the foot
 - **No script on the app pages** -- the kits' header and footer styles with static markup and a CSP that allows only this site and the CDN stylesheet, so a policy page sends nothing anywhere
 - **Drafts stay the app's** -- `tools/import-pages.py` wraps an app session's drafted pages in this site's shell without touching their words
 
@@ -72,18 +75,27 @@ python3 -m http.server 8904
 
 ## Keeping it true
 
-| What changed | Where to edit |
-|---|---|
-| An app's state (a new build, a submission, a release) | its `<article>` in `index.html`, the `app__state` line |
-| Amigos, Pittari, Enerbot Doll or Celular Listo revised their pages | `python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages` (or `pittari ../qrpass-ios/docs/app-store/1.0/pages`, or `enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages`, or `celular-listo ../phonecheck-android/docs/play-store/pages`) |
-| An app's pages in more than one language | its `langs` in `tools/import-pages.py`, the App Store record's primary language first; each other language's drafts go in `<pages>/<lang>/` and land at `/<app>/<lang>/` |
-| HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written from `projects/headpain-ios` at build 5. The face scan on its `face-scan` branch needs a new version before it ships |
-| New screenshots | resize to 480 px wide WebP into `assets/shots/<app>/`, keep the alt text true |
-| An icon changed | render the app's `AppIcon.icon` with Icon Composer's `ictool` (see `packages/app-icons`) into `assets/icons/` |
+Edit `data/apps.json`, then run `python3 tools/build-catalog.py` and commit what
+it wrote. `python3 tools/build-catalog.py --check` exits 1 when anything is out
+of date. Release operations (a build, a submission, a review) are not this
+site's business: they live in the app repos' release docs.
 
-Amigos' cards use simulator captures from `docs/screenshots/` in amigos-ios;
-replace them with the 6.9-inch store set once it is committed under
-`docs/app-store/1.0.0/screenshots/iphone-6.9/`.
+| What changed | What to do |
+|---|---|
+| An app shipped, or a public test opened | its `status` in `data/apps.json` (`available` needs its `store` link; `test` shows Prueba abierta), then build |
+| The newest store release | move `featured` to it; one band at a time is featured |
+| A promise, a category, a trait or a screenshot | its entry in `data/apps.json`; every screenshot needs alt text and a short feature caption, or the tool refuses |
+| New screenshots | resize to 480 px wide WebP into `assets/shots/<app>/` and list them in `data/apps.json` |
+| An icon changed | render the app's `AppIcon.icon` with Icon Composer's `ictool` (see `packages/app-icons`) into `assets/icons/`, PNG and WebP |
+| A category icon | copy it from `packages/neorgon-ui/fleet/icons/<id>.svg` into `assets/categories/`; without one the chip shows its label alone |
+| Pittari, Enerbot Doll or Celular Listo revised their pages | `python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages` (or `enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages`, or `celular-listo ../phonecheck-android/docs/play-store/pages`); a draft's words are kept, the shell around them is this site's |
+| The page shell changed (`import-pages.py`, `doc.css`, `family.css`) | `python3 tools/import-pages.py --rewrap all`, which takes each page's words from the page itself |
+| Amigos de Enerbot's pages | frozen while its first version is in App Review: both tools refuse to write `amigos/`. Import its drafts once the review is over |
+| HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written by hand from `projects/headpain-ios`; `--rewrap` changes only its shell. The face scan needs a new version of the policy before it ships |
+| The crumb and shelf on Kurukuru's pages | `python3 tools/build-catalog.py --stamp-family` writes them into `../hobbyorbit-site/kurukuru/`, with copies of the icons and `css/family.css` (that site allows only its own images); `--stamp-family --check` reports drift |
+
+Amigos has no screenshots in the catalog until the store set, or a demo
+community, is shot.
 
 ---
 
@@ -93,24 +105,33 @@ replace them with the 6.9-inch store set once it is committed under
 
 ```
 apps-site/
-├── index.html              # The catalog, in Spanish
-├── amigos/                 # Amigos de Enerbot help + privacy/ (Spanish)
+├── index.html              # The catalog, in Spanish (the shelf and bands are generated)
+├── 404.html                # Self-contained; its app list is generated
+├── data/apps.json          # Every app fact the catalog shows: public status only
+├── amigos/                 # Amigos de Enerbot help + privacy/ (Spanish; frozen during review)
 ├── pittari/                # Pittari support + privacy/ (English)
-├── headpain/               # HeadPain support + privacy/ (English)
+├── headpain/               # HeadPain support + privacy/ (English, written here by hand)
 ├── enerbot-doll/           # Enerbot Doll help + privacy/ (Spanish)
 ├── celular-listo/          # Celular Listo (Android) help + privacy/ (Spanish; English under en/)
 ├── css/
 │   ├── style.css           # Fleet baseline and the site accent
-│   ├── catalog.css         # The catalog's cards and screenshot strips
+│   ├── catalog.css         # The shelf, the bands and the screenshot stage
+│   ├── apps.css            # Each app's hue and ink (generated)
 │   ├── doc.css             # The help and privacy pages
+│   ├── family.css          # The crumb and the family shelf (also copied to hobbyorbit-site)
 │   └── neorgon-*.css       # Vendored kits (header, themes, footer, beacon)
 ├── js/neorgon-*.js         # Vendored kits, catalog page only
 ├── assets/
 │   ├── icons/              # App icons rendered from each AppIcon.icon
-│   └── shots/<app>/        # Simulator screenshots, 480 px WebP
-├── tools/import-pages.py   # Wraps an app's drafted pages in this site's shell
+│   ├── categories/         # Category icons from packages/neorgon-ui/fleet/icons
+│   └── shots/<app>/        # Screenshots, 480 px WebP
+├── tools/
+│   ├── build-catalog.py    # Writes the catalog and its siblings from data/apps.json
+│   ├── import-pages.py     # Wraps an app's drafted pages in this site's shell
+│   └── appdata.py          # The data, checked, and the pieces both tools share
 ├── docs/architecture.mmd   # Source of the diagram above
-├── robots.txt, sitemap.xml, 404.html, CNAME
+├── llms.txt, sitemap.xml   # Generated
+├── robots.txt, CNAME
 └── favicon set             # Generated from the hub card by sync-favicon.sh
 ```
 

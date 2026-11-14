@@ -20,17 +20,20 @@ config:
 flowchart TB
     User([Visitor or App Review]) --> HTML["index.html\nCatalog in Spanish, Header and Footer Kits"]
 
-    subgraph App["Static site (no build step)"]
-        HTML --> Assets["assets/\nicons from packages/app-icons,\nsimulator screenshots as WebP"]
-        HTML --> Docs["amigos/ pittari/ headpain/ enerbot-doll/\nhelp + privacy pages, no script"]
-        Docs --> DocCSS["css/doc.css\nthe app's hue from its icon"]
+    subgraph App["Static site (no build step at runtime)"]
+        Data["data/apps.json\npublic status, promise, hue, screenshots"] -->|"tools/build-catalog.py"| HTML
+        Data -->|"tools/build-catalog.py"| Gen["404.html list, css/apps.css,\nllms.txt, sitemap.xml"]
+        HTML --> Assets["assets/\nicons from packages/app-icons,\nscreenshots as WebP"]
+        HTML --> Docs["pittari/ headpain/ enerbot-doll/ celular-listo/ amigos/\nhelp + privacy pages, no script"]
+        Docs --> DocCSS["css/doc.css, css/family.css\nthe app's hue from css/apps.css"]
     end
 
     subgraph Repos["App repos (read only)"]
-        Drafts["docs/app-store/&lt;version&gt;/pages/\nAmigos, Pittari and Enerbot Doll drafts"]
-        Shots["docs/app-store/&lt;version&gt;/screenshots/\nand docs/screenshots/"]
+        Drafts["docs/app-store/&lt;version&gt;/pages/\nPittari, Enerbot Doll and Celular Listo drafts"]
+        Shots["docs/app-store/&lt;version&gt;/screenshots/"]
     end
 
     Drafts -->|"tools/import-pages.py"| Docs
     Shots -->|"resized by hand, 480 px WebP"| Assets
-    HTML -->|"links"| Sites["yomu.neorgon.com/naninani/\nhobbyorbit.neorgon.com\nheadpain.neorgon.com"]
+    HTML -->|"links"| Sites["yomu.neorgon.com/naninani/\nhobbyorbit.neorgon.com/kurukuru/\nheadpain.neorgon.com"]
+    Data -->|"build-catalog.py --stamp-family"| Sites
