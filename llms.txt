@@ -14,9 +14,10 @@
 - Kurukuru (Hobby Orbit): a hobby wheel, learning in steps and your own rhythms, on iPhone and Apple Watch. In internal TestFlight. Support and privacy, in English, on its own site: https://hobbyorbit.neorgon.com/kurukuru/ and https://hobbyorbit.neorgon.com/kurukuru/privacy/
 - HeadPain: a headache diary with a 3D head map and a report for a doctor. In internal TestFlight. Support and privacy, in English: https://apps.neorgon.com/headpain/ and https://apps.neorgon.com/headpain/privacy/
 - Enerbot Doll (it was Chokon): Enerbot as a robot doll you pose and keep on your widgets; a poke makes him react, and touches and days unlock wigs and accessories. On the App Store (1.0.0) since 2026-11-11. Help and privacy, in Spanish: https://apps.neorgon.com/enerbot-doll/ and https://apps.neorgon.com/enerbot-doll/privacy/
+- Celular Listo: an Android checklist for getting a relative's phone ready (backups, accounts, ease of use, locks, emergency). It shows how each setting stands and where to change it, and changes nothing itself. Not on Google Play yet: it has to pass a closed test first, so it has no card in the catalog. Help and privacy, in Spanish: https://apps.neorgon.com/celular-listo/ and https://apps.neorgon.com/celular-listo/privacy/; in English: https://apps.neorgon.com/celular-listo/en/ and https://apps.neorgon.com/celular-listo/en/privacy/
 
 ## Notes
 
 - The help and privacy pages load no script.
 - None of the apps has terms of its own; on the App Store, Apple's standard licence applies.
-- Contact: support@neorgon.org (Amigos de Enerbot: contact@neorgon.com).
+- Contact: support@neorgon.org (Amigos de Enerbot and Celular Listo: contact@neorgon.com).

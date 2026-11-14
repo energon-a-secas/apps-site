@@ -8,6 +8,7 @@
 .doc--pittari { --app-hue: #f0ae49; --app-ink: #f6c97f; }
 .doc--headpain { --app-hue: #41826d; --app-ink: #8fd3b8; }
 .doc--enerbot-doll { --app-hue: #17a2b8; --app-ink: #8fdbe6; }
+.doc--celular-listo { --app-hue: #0b6b63; --app-ink: #7fd6cb; }
 
 /* A soft wash of the app's hue behind the header, so each app's pages read as
    that app's without changing the fleet's dark shell. */

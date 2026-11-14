@@ -10,11 +10,12 @@ Run it again after the app's session revises a draft:
     python3 tools/import-pages.py amigos ../amigos-ios/docs/app-store/1.0.0/pages
     python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages
     python3 tools/import-pages.py enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages
+    python3 tools/import-pages.py celular-listo ../phonecheck-android/docs/play-store/pages
 
-An app in several languages lists them under 'langs', its App Store record's
+An app in several languages lists them under 'langs', its store record's
 primary language first. That language's drafts sit at the top of the folder
 and land at /<app>/; each other language's sit in <folder>/<lang>/ and land
-at /<app>/<lang>/, the URL that language's App Store localization lists. A
+at /<app>/<lang>/, the URL that language's store listing gives. A
 language with no draft yet is skipped. Once two languages are in, every page
 names the others: hreflang links in its head, and their own names beside the
 way back to the catalog (the header keeps its two tabs).
@@ -64,6 +65,24 @@ APPS = {
                 'all': 'アプリ一覧', 'crumb': 'Neorgon のアプリ一覧', 'related': '関連ページ',
                 'skip': '本文へスキップ', 'part': 'Neorgon が運営',
                 'native': '日本語', 'langs': '言語',
+            },
+        },
+    },
+    # An Android app, for Google Play; its listing's default language is Spanish (Latin America).
+    'celular-listo': {
+        'name': 'Celular Listo', 'skin': 'jade',
+        'langs': {
+            'es': {
+                'help': 'Ayuda', 'privacy': 'Privacidad', 'policy': 'Política de privacidad',
+                'all': 'Todas las apps', 'crumb': 'Todas las apps de Neorgon', 'related': 'Páginas relacionadas',
+                'skip': 'Ir al contenido', 'part': 'Parte de Neorgon',
+                'native': 'Español', 'langs': 'Idiomas',
+            },
+            'en': {
+                'help': 'Help', 'privacy': 'Privacy', 'policy': 'Privacy policy',
+                'all': 'All apps', 'crumb': 'All Neorgon apps', 'related': 'Related pages',
+                'skip': 'Skip to content', 'part': 'Part of Neorgon',
+                'native': 'English', 'langs': 'Languages',
             },
         },
     },
