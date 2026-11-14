@@ -17,6 +17,7 @@ takes their words from the pages themselves and so cannot pull in a draft
 nobody meant to publish:
 
     python3 tools/import-pages.py --rewrap all      # or one app: --rewrap pittari
+    python3 tools/import-pages.py --rewrap all --check   # exit 1 when a page is not in the current shell
 
 The shell around the words: a crumb back to the app's band in the catalog, a
 kicker built from the app's facts (a privacy page keeps its draft's effective
@@ -302,7 +303,10 @@ def build(data, app_id, folder, rewrap):
 
 def main(argv):
     rewrap = '--rewrap' in argv
-    args = [a for a in argv if a != '--rewrap']
+    check = '--check' in argv
+    args = [a for a in argv if a not in ('--rewrap', '--check')]
+    if check and not rewrap:
+        sys.exit('--check goes with --rewrap')
     if rewrap and len(args) == 1:
         targets = list(APPS) if args[0] == 'all' else [args[0]]
     elif not rewrap and len(args) == 2:
@@ -321,11 +325,21 @@ def main(argv):
     for app_id in targets:
         folder = SITE / app_id if rewrap else Path(args[1])
         pending += build(data, app_id, folder, rewrap)
+    stale = []
     for source, out, text in pending:
+        if out.is_file() and out.read_text(encoding='utf-8') == text:
+            continue
+        stale.append(out.relative_to(SITE).as_posix())
+        if check:
+            continue
         out.parent.mkdir(parents=True, exist_ok=True)
-        if not out.is_file() or out.read_text(encoding='utf-8') != text:
-            out.write_text(text, encoding='utf-8')
-            print(f'{source.relative_to(SITE) if source.is_relative_to(SITE) else source} -> {out.relative_to(SITE)}')
+        out.write_text(text, encoding='utf-8')
+        print(f'{source.relative_to(SITE) if source.is_relative_to(SITE) else source} -> {out.relative_to(SITE)}')
+    if check:
+        if stale:
+            print('not in the current shell: ' + ', '.join(stale) + ' (run python3 tools/import-pages.py --rewrap all)')
+            sys.exit(1)
+        print(f'{len(pending)} app pages are in the current shell (amigos/ is frozen and not checked)')
 
 
 if __name__ == '__main__':
