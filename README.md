@@ -89,7 +89,7 @@ site's business: they live in the app repos' release docs.
 | An icon changed | render the app's `AppIcon.icon` with Icon Composer's `ictool` (see `packages/app-icons`) into `assets/icons/`, PNG and WebP |
 | A category icon | copy it from `packages/neorgon-ui/fleet/icons/<id>.svg` into `assets/categories/`; without one the chip shows its label alone |
 | Pittari, Enerbot Doll or Celular Listo revised their pages | `python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages` (or `enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages`, or `celular-listo ../phonecheck-android/docs/play-store/pages`); a draft's words are kept, the shell around them is this site's |
-| The page shell changed (`import-pages.py`, `doc.css`, `family.css`) | `python3 tools/import-pages.py --rewrap all`, which takes each page's words from the page itself |
+| The page shell changed (`import-pages.py`, `doc.css`, `family.css`) | `python3 tools/import-pages.py --rewrap all`, which takes each page's words from the page itself; `--rewrap all --check` exits 1 when a page is out of date |
 | Amigos de Enerbot's pages | frozen while its first version is in App Review: both tools refuse to write `amigos/`. Import its drafts once the review is over |
 | HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written by hand from `projects/headpain-ios`; `--rewrap` changes only its shell. The face scan needs a new version of the policy before it ships |
 | The crumb and shelf on Kurukuru's pages | `python3 tools/build-catalog.py --stamp-family` writes them into `../hobbyorbit-site/kurukuru/`, with copies of the icons and `css/family.css` (that site allows only its own images); `--stamp-family --check` reports drift |
