@@ -201,7 +201,7 @@ html { scroll-padding-top: 72px; }
 .band__meta a:hover { text-decoration-color: var(--app-ink); text-decoration-thickness: 2px; }
 .band__note { margin-left: -12px; color: var(--text-secondary); }
 @media (pointer: coarse) {
-  .band__meta a { min-height: 44px; }
+  .band__meta a { min-width: 44px; min-height: 44px; }
 }
 
 /* ── Stage: the screenshots ────────────────────────────────────
