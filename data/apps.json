@@ -1,0 +1,214 @@
+{
+  "about": "Every app fact a visitor sees on apps.neorgon.com. Edit this file, then run python3 tools/build-catalog.py. Public status only: available, soon or test. Builds, reviews and release dates live in each app's own repo, never here: this repo is public.",
+  "categories": {
+    "learning": { "es": "Aprender", "en": "Learning" },
+    "crew": { "es": "Comunidad", "en": "Crew" },
+    "play": { "es": "Jugar", "en": "Play" },
+    "hobbies": { "es": "Pasatiempos", "en": "Hobbies" },
+    "life": { "es": "Día a día", "en": "Life" }
+  },
+  "apps": [
+    {
+      "id": "pittari",
+      "name": "Pittari",
+      "promise": "Cada entrada, justo a la medida.",
+      "category": "life",
+      "platforms": ["iPhone"],
+      "traits": ["Widgets", "Sin cuenta", "Sin publicidad"],
+      "status": "available",
+      "featured": true,
+      "store": { "name": "App Store", "id": "6832228316", "url": "https://apps.apple.com/app/id6832228316" },
+      "web": null,
+      "os": "iOS 18",
+      "schema_category": "UtilitiesApplication",
+      "pages": {
+        "help": [{ "url": "https://apps.neorgon.com/pittari/", "lang": "en" }],
+        "privacy": [{ "url": "https://apps.neorgon.com/pittari/privacy/", "lang": "en" }]
+      },
+      "contact": "support@neorgon.org",
+      "hue": "#f0ae49",
+      "ink": "#f6c97f",
+      "skin": "brass",
+      "icon": "assets/icons/pittari.webp",
+      "icon_png": "assets/icons/pittari.png",
+      "screenshots": [
+        { "src": "assets/shots/pittari/01-pass.webp", "alt": "Una tarjeta de embarque de Santiago a Lima con su código redibujado", "caption": "El código, redibujado nítido" },
+        { "src": "assets/shots/pittari/02-review.webp", "alt": "La revisión de un PDF con tres códigos, redibujados junto al original", "caption": "Comprobado contra el original" },
+        { "src": "assets/shots/pittari/03-fullscreen.webp", "alt": "Un código a pantalla completa con el brillo al máximo", "caption": "Listo en la puerta" },
+        { "src": "assets/shots/pittari/04-widgets.webp", "alt": "La Live Activity y los widgets del próximo pase", "caption": "Widgets y Actividad en vivo" },
+        { "src": "assets/shots/pittari/05-kept.webp", "alt": "Pases guardados para Apple Wallet: 4 de 50 lugares usados", "caption": "Guardados para Apple Wallet" }
+      ]
+    },
+    {
+      "id": "naninani",
+      "name": "Naninani",
+      "promise": "Una pequeña ayuda para leer japonés.",
+      "category": "learning",
+      "platforms": ["iPhone"],
+      "traits": ["Apple Watch", "Sin conexión", "Sin cuenta", "Sin publicidad"],
+      "status": "available",
+      "store": { "name": "App Store", "id": "6823867428", "url": "https://apps.apple.com/app/id6823867428" },
+      "web": null,
+      "os": "iOS 17",
+      "schema_category": "EducationalApplication",
+      "pages": {
+        "help": [{ "url": "https://yomu.neorgon.com/naninani/", "lang": "en" }],
+        "privacy": [{ "url": "https://yomu.neorgon.com/naninani/privacy/", "lang": "en" }]
+      },
+      "contact": "support@neorgon.org",
+      "hue": "#6c4ceb",
+      "ink": "#b3a4ff",
+      "skin": "",
+      "icon": "assets/icons/naninani.webp",
+      "icon_png": "assets/icons/naninani.png",
+      "screenshots": [
+        { "src": "assets/shots/naninani/01-leer.webp", "alt": "Leer: una oración con furigana y la lectura de cada palabra", "caption": "Furigana palabra por palabra" },
+        { "src": "assets/shots/naninani/02-palabra.webp", "alt": "Una palabra abierta: significado, kanji, sonidos y ejemplos", "caption": "Cada palabra, abierta" },
+        { "src": "assets/shots/naninani/03-kana.webp", "alt": "Juegos de kana: elegir la lectura de un hiragana", "caption": "Juegos de kana" },
+        { "src": "assets/shots/naninani/04-tarjetas.webp", "alt": "Tarjetas de kanji del JLPT N5", "caption": "Tarjetas de kanji" },
+        { "src": "assets/shots/naninani/05-kanji.webp", "alt": "Un kanji con sus lecturas y su orden de trazos", "caption": "El orden de los trazos" }
+      ]
+    },
+    {
+      "id": "enerbot-doll",
+      "name": "Enerbot Doll",
+      "promise": "Enerbot, en tu pantalla de inicio.",
+      "category": "play",
+      "platforms": ["iPhone"],
+      "traits": ["Widgets", "Sin cuenta", "Sin conexión", "Sin publicidad"],
+      "status": "available",
+      "store": { "name": "App Store", "id": "6832789744", "url": "https://apps.apple.com/app/id6832789744" },
+      "web": null,
+      "os": "iOS 18",
+      "schema_category": "EntertainmentApplication",
+      "pages": {
+        "help": [{ "url": "https://apps.neorgon.com/enerbot-doll/", "lang": "es" }],
+        "privacy": [{ "url": "https://apps.neorgon.com/enerbot-doll/privacy/", "lang": "es" }]
+      },
+      "contact": "contact@neorgon.com",
+      "hue": "#17a2b8",
+      "ink": "#8fdbe6",
+      "skin": "",
+      "icon": "assets/icons/enerbot-doll.webp",
+      "icon_png": "assets/icons/enerbot-doll.png",
+      "screenshots": [
+        { "src": "assets/shots/enerbot-doll/01-widgets.webp", "alt": "Tres widgets en la pantalla de inicio: Enerbot con afro y lentes en el grande y otros dos muñecos en los pequeños, cada uno con 342 toques", "caption": "En tus widgets" },
+        { "src": "assets/shots/enerbot-doll/02-posar.webp", "alt": "Posar: Enerbot saluda en el editor, con poses para elegir y los botones Ajuste fino, Espejo y Al azar", "caption": "Pósalo como quieras" },
+        { "src": "assets/shots/enerbot-doll/03-coleccion.webp", "alt": "La Colección: 342 toques, 15 de 19 piezas desbloqueadas y lo que viene, como un monóculo a 158 toques", "caption": "Toques que desbloquean piezas" },
+        { "src": "assets/shots/enerbot-doll/04-contorno.webp", "alt": "Estilo: un muñeco gris con antena de TV, los colores de su carcasa, la luz de sus ojos y el contorno", "caption": "Vístelo a tu estilo" }
+      ]
+    },
+    {
+      "id": "kurukuru",
+      "name": "Kurukuru",
+      "promise": "Tus pasatiempos, a su propio ritmo.",
+      "category": "hobbies",
+      "platforms": ["iPhone"],
+      "traits": ["Apple Watch", "Widgets", "Sin cuenta", "En inglés"],
+      "status": "soon",
+      "store": null,
+      "web": "https://hobbyorbit.neorgon.com/",
+      "os": "iOS 18",
+      "schema_category": "LifestyleApplication",
+      "pages": {
+        "help": [{ "url": "https://hobbyorbit.neorgon.com/kurukuru/", "lang": "en" }],
+        "privacy": [{ "url": "https://hobbyorbit.neorgon.com/kurukuru/privacy/", "lang": "en" }]
+      },
+      "contact": "support@neorgon.org",
+      "hue": "#3445ae",
+      "ink": "#a7b3ff",
+      "skin": "",
+      "icon": "assets/icons/kurukuru.webp",
+      "icon_png": "assets/icons/kurukuru.png",
+      "screenshots": [
+        { "src": "assets/shots/kurukuru/01-orbit.webp", "alt": "Orbit: los pasatiempos girando alrededor del que está en foco", "caption": "Tus pasatiempos en órbita" },
+        { "src": "assets/shots/kurukuru/02-wheel.webp", "alt": "La rueda de siete categorías, lista para girar", "caption": "Gira la rueda" },
+        { "src": "assets/shots/kurukuru/03-checkin.webp", "alt": "Un check-in: cómo te sentiste, tu energía y qué ayudó", "caption": "Cómo te fue" },
+        { "src": "assets/shots/kurukuru/04-cycles.webp", "alt": "Ciclos: a qué hora del día vuelves a cada pasatiempo", "caption": "Tus ritmos" },
+        { "src": "assets/shots/kurukuru/05-journal.webp", "alt": "El diario con los check-ins de cada día", "caption": "Tu diario" }
+      ]
+    },
+    {
+      "id": "headpain",
+      "name": "HeadPain",
+      "promise": "Un diario de dolor de cabeza que puedes mostrarle a un médico.",
+      "category": "life",
+      "platforms": ["iPhone"],
+      "traits": ["Widgets", "Sin cuenta", "Sin publicidad", "En inglés"],
+      "status": "soon",
+      "store": null,
+      "web": "https://headpain.neorgon.com/",
+      "os": "iOS 18",
+      "schema_category": "HealthApplication",
+      "pages": {
+        "help": [{ "url": "https://apps.neorgon.com/headpain/", "lang": "en" }],
+        "privacy": [{ "url": "https://apps.neorgon.com/headpain/privacy/", "lang": "en" }]
+      },
+      "contact": "support@neorgon.org",
+      "hue": "#41826d",
+      "ink": "#8fd3b8",
+      "skin": "jade",
+      "icon": "assets/icons/headpain.webp",
+      "icon_png": "assets/icons/headpain.png",
+      "screenshots": [
+        { "src": "assets/shots/headpain/01-3d.webp", "alt": "Look in 3D: la cabeza de frente con los lugares que dolieron", "caption": "Dónde duele, en 3D" },
+        { "src": "assets/shots/headpain/02-episode.webp", "alt": "Un episodio de migraña con su mapa y cómo cambió la intensidad", "caption": "Cada episodio, con su mapa" },
+        { "src": "assets/shots/headpain/03-usual.webp", "alt": "Look in 3D con la forma habitual de una migraña", "caption": "Tu forma habitual" }
+      ]
+    },
+    {
+      "id": "amigos",
+      "name": "Amigos de Enerbot",
+      "promise": "La comunidad Energon en tu bolsillo.",
+      "category": "crew",
+      "platforms": ["iPhone"],
+      "traits": ["Con cuenta Neorgon", "Sin publicidad"],
+      "status": "soon",
+      "store": null,
+      "web": null,
+      "os": "iOS 17",
+      "schema_category": "LifestyleApplication",
+      "pages": {
+        "help": [{ "url": "https://apps.neorgon.com/amigos/", "lang": "es" }],
+        "privacy": [{ "url": "https://apps.neorgon.com/amigos/privacy/", "lang": "es" }]
+      },
+      "contact": "contact@neorgon.com",
+      "hue": "#8c37a8",
+      "ink": "#d9a0ec",
+      "skin": "",
+      "icon": "assets/icons/amigos.webp",
+      "icon_png": "assets/icons/amigos.png",
+      "screenshots": []
+    },
+    {
+      "id": "celular-listo",
+      "name": "Celular Listo",
+      "promise": "Una lista para dejar el teléfono como lo necesita quien lo usa.",
+      "category": "life",
+      "platforms": ["Android"],
+      "traits": ["Sin cuenta", "Sin conexión"],
+      "status": "soon",
+      "store": null,
+      "web": null,
+      "os": "Android 10",
+      "schema_category": "UtilitiesApplication",
+      "pages": {
+        "help": [
+          { "url": "https://apps.neorgon.com/celular-listo/", "lang": "es" },
+          { "url": "https://apps.neorgon.com/celular-listo/en/", "lang": "en" }
+        ],
+        "privacy": [
+          { "url": "https://apps.neorgon.com/celular-listo/privacy/", "lang": "es" },
+          { "url": "https://apps.neorgon.com/celular-listo/en/privacy/", "lang": "en" }
+        ]
+      },
+      "contact": "contact@neorgon.com",
+      "hue": "#0b6b63",
+      "ink": "#7fd6cb",
+      "skin": "jade",
+      "icon": "assets/icons/celular-listo.webp",
+      "icon_png": "assets/icons/celular-listo.png",
+      "screenshots": []
+    }
+  ]
+}

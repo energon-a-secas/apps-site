@@ -9,36 +9,107 @@
   <meta name="apple-mobile-web-app-title" content="Neorgon Apps">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="neo-mark" content="on">
-  <title>No encontrada | Neorgon Apps</title>
+  <title>No encontrada | Apps de Neorgon</title>
   <meta name="robots" content="noindex">
-  <link rel="stylesheet" href="https://cdn.neorgon.org/v1.0.0/styles/base.css">
   <style>
     /* Self-contained on purpose. A 404 that depends on the site's own CSS
-       bundle breaks exactly when something is already wrong with the paths. */
+       bundle breaks exactly when something is already wrong with the paths,
+       so every colour is written here and every link starts at the root. */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { color-scheme: dark; }
     body {
-      margin: 0; min-height: 100dvh; display: grid; place-items: center;
-      background: #0a0a12; color: #f4f4f8; text-align: center;
-      font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
-      padding: 2rem;
+      margin: 0; min-height: 100dvh; background: #040714; color: #f9f9f9;
+      font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
     }
-    .code { font-size: clamp(4rem, 18vw, 9rem); font-weight: 800; line-height: 1;
-            margin: 0; color: #E326E4; letter-spacing: -.04em; }
-    h1 { font-size: clamp(1.1rem, 4vw, 1.5rem); font-weight: 600; margin: .75rem 0 .35rem; }
-    p  { color: rgba(255,255,255,.62); margin: 0 0 1.75rem; max-width: 34ch; }
-    a  { display: inline-block; padding: .7rem 1.4rem; border-radius: 8px;
-         background: #E326E4; color: #fff; text-decoration: none; font-weight: 600; }
-    a:hover { filter: brightness(1.1); }
-    a + a { margin-left: .6rem; background: transparent; color: rgba(255,255,255,.72);
-            border: 1px solid rgba(255,255,255,.18); }
+    main { width: min(100% - 32px, 44rem); margin: 0 auto; padding: clamp(40px, 9vh, 96px) 0 64px; }
+    .code { margin: 0; font-size: clamp(3.5rem, 14vw, 5.5rem); font-weight: 800; line-height: 1;
+            letter-spacing: -.04em; color: #e08fdf; }
+    h1 { margin: 16px 0 8px; font-size: 1.75rem; line-height: 1.2; font-weight: 700; }
+    .lead { margin: 0 0 24px; max-width: 34rem; color: #cacaca; font-size: 1rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 48px; }
+    .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 12px;
+           font-weight: 650; font-size: 1rem; text-decoration: none; }
+    .btn--primary { background: #cd60cc; color: #12051a; }
+    .btn--primary:hover { background: #d97bd8; }
+    .btn--quiet { color: #f9f9f9; border: 1px solid rgb(255 255 255 / 30%); }
+    .btn--quiet:hover { background: rgb(255 255 255 / 8%); }
+    h2 { margin: 0 0 16px; font-size: 1.25rem; font-weight: 700; }
+    .shelf { margin: 0 0 48px; }
+    .shelf__inner { display: flex; flex-wrap: wrap; gap: 24px 40px; }
+    .shelf__label { margin: 0 0 12px; color: #cacaca; font-size: .875rem; font-weight: 600; }
+    .shelf__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 76px); gap: 12px; }
+    .shelf__group--available .shelf__grid { grid-template-columns: repeat(3, 76px); }
+    .shelf__app { display: grid; justify-items: center; gap: 6px; padding: 6px 2px; border-radius: 14px;
+                  color: #f9f9f9; text-decoration: none; font-size: .875rem; line-height: 1.25; text-align: center; }
+    .shelf__app img { width: 64px; height: 64px; border-radius: 22.5%; }
+    .shelf__app:hover .shelf__name { text-decoration: underline; text-underline-offset: .2em; }
+    .pages { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgb(255 255 255 / 12%); }
+    .pages li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; min-height: 52px;
+                padding: 4px 0; border-bottom: 1px solid rgb(255 255 255 / 12%); }
+    .pages .app { flex: 1 1 10rem; font-weight: 650; }
+    .pages a { display: inline-flex; align-items: center; min-height: 44px; color: #f9f9f9;
+               text-decoration: underline; text-decoration-color: #e08fdf; text-underline-offset: .2em; }
+    .pages .lang { display: inline-block; margin-left: .3em; color: #cacaca; }
+    :focus-visible { outline: 2px solid #e08fdf; outline-offset: 3px; border-radius: 4px; }
+    .shelf__app:focus-visible { border-radius: 14px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+               clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @media (max-width: 480px) {
+      .shelf__inner { display: block; }
+      .shelf__group + .shelf__group { margin-top: 20px; }
+      .shelf__grid, .shelf__group--available .shelf__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .pages li { padding: 10px 0 4px; }
+      .pages .app { flex-basis: 100%; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .btn { transition: background-color .2s cubic-bezier(.22, 1, .36, 1); }
+    }
   </style>
 </head>
 <body>
   <main>
     <p class="code">404</p>
     <h1>Esta página no está aquí</h1>
-    <p>El enlace puede ser antiguo, o la dirección puede tener un error.</p>
-    <a href="/">Volver a Neorgon Apps</a>
-    <a href="https://neorgon.com">Todo Neorgon</a>
+    <p class="lead">El enlace puede ser antiguo, o la dirección puede tener un error.</p>
+    <p class="actions"><a class="btn btn--primary" href="/">Volver a Apps de Neorgon</a><a class="btn btn--quiet" href="https://neorgon.com/">Todo Neorgon</a></p>
+    <h2>¿Buscabas una de estas apps?</h2>
+    <!-- Written by tools/build-catalog.py from data/apps.json: edit the data, not the blocks. -->
+    <!-- catalog-shelf -->
+  <nav class="shelf" aria-label="Apps de Neorgon">
+    <div class="shelf__inner">
+      <div class="shelf__group shelf__group--available">
+        <p class="shelf__label" id="shelf-available">En el App Store</p>
+        <ul class="shelf__grid" aria-labelledby="shelf-available">
+          <li><a class="shelf__app" href="/#pittari"><img src="/assets/icons/pittari.webp" alt="" width="64" height="64"><span class="shelf__name">Pittari</span></a></li>
+          <li><a class="shelf__app" href="/#naninani"><img src="/assets/icons/naninani.webp" alt="" width="64" height="64"><span class="shelf__name">Naninani</span></a></li>
+          <li><a class="shelf__app" href="/#enerbot-doll"><img src="/assets/icons/enerbot-doll.webp" alt="" width="64" height="64"><span class="shelf__name">Enerbot Doll</span></a></li>
+        </ul>
+      </div>
+      <div class="shelf__group shelf__group--soon">
+        <p class="shelf__label" id="shelf-soon">Próximamente</p>
+        <ul class="shelf__grid" aria-labelledby="shelf-soon">
+          <li><a class="shelf__app" href="/#kurukuru"><img src="/assets/icons/kurukuru.webp" alt="" width="64" height="64"><span class="shelf__name">Kurukuru</span></a></li>
+          <li><a class="shelf__app" href="/#headpain"><img src="/assets/icons/headpain.webp" alt="" width="64" height="64"><span class="shelf__name">HeadPain</span></a></li>
+          <li><a class="shelf__app" href="/#amigos"><img src="/assets/icons/amigos.webp" alt="" width="64" height="64"><span class="shelf__name">Amigos de Enerbot</span></a></li>
+          <li><a class="shelf__app" href="/#celular-listo"><img src="/assets/icons/celular-listo.webp" alt="" width="64" height="64"><span class="shelf__name">Celular Listo</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <!-- /catalog-shelf -->
+    <h2>Ayuda y privacidad</h2>
+    <!-- catalog-pages -->
+      <ul class="pages">
+        <li><span class="app">Pittari</span> <a href="/pittari/" hreflang="en">Ayuda <span class="lang">(en inglés)</span></a><a href="/pittari/privacy/" hreflang="en">Privacidad <span class="lang">(en inglés)</span></a></li>
+        <li><span class="app">Naninani</span> <a href="https://yomu.neorgon.com/naninani/" hreflang="en">Ayuda <span class="lang">(en inglés)</span></a><a href="https://yomu.neorgon.com/naninani/privacy/" hreflang="en">Privacidad <span class="lang">(en inglés)</span></a></li>
+        <li><span class="app">Enerbot Doll</span> <a href="/enerbot-doll/">Ayuda</a><a href="/enerbot-doll/privacy/">Privacidad</a></li>
+        <li><span class="app">Kurukuru</span> <a href="https://hobbyorbit.neorgon.com/kurukuru/" hreflang="en">Ayuda <span class="lang">(en inglés)</span></a><a href="https://hobbyorbit.neorgon.com/kurukuru/privacy/" hreflang="en">Privacidad <span class="lang">(en inglés)</span></a></li>
+        <li><span class="app">HeadPain</span> <a href="/headpain/" hreflang="en">Ayuda <span class="lang">(en inglés)</span></a><a href="/headpain/privacy/" hreflang="en">Privacidad <span class="lang">(en inglés)</span></a></li>
+        <li><span class="app">Amigos de Enerbot</span> <a href="/amigos/">Ayuda</a><a href="/amigos/privacy/">Privacidad</a></li>
+        <li><span class="app">Celular Listo</span> <a href="/celular-listo/">Ayuda</a><a href="/celular-listo/privacy/">Privacidad</a><a href="/celular-listo/en/" hreflang="en" lang="en">In English</a></li>
+      </ul>
+      <!-- /catalog-pages -->
   </main>
 </body>
 </html>
