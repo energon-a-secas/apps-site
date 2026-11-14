@@ -181,5 +181,5 @@
   #main.doc-main.doc-main--shell { display: block; width: 100%; }
   .doc-main--shell .doc-shell { display: block; }
   .doc-body { max-width: none; }
-  .doc-install, .neo-crumb, .neo-crumb-row { display: none; }
+  .doc-install { display: none; }
 }
