@@ -42,15 +42,16 @@
     <section id="lee" aria-labelledby="lee-titulo">
       <h2 id="lee-titulo">Qué lee en el teléfono</h2>
       <ul>
-        <li><strong>Ajustes</strong>, para mostrar cómo está cada uno: tamaño del texto y de visualización, tiempo de espera de la pantalla, si hay bloqueo de pantalla y huella o rostro configurados (solo sí o no), copia de seguridad activada o no, modo de sonido y volumen del tono, No molestar, ubicación activada o no, modo de navegación, hora automática, opciones de desarrollador, DNS privado, la fecha de la última actualización de seguridad y el espacio libre.</li>
-        <li><strong>Los nombres de algunas apps instaladas</strong>: las que tienen acceso de accesibilidad, de notificaciones, de administración del dispositivo, de teclado o de autocompletado; las apps predeterminadas de SMS, teléfono y navegador; y si está instalada una lista corta y fija de apps: cuatro apps de asistencia remota, WhatsApp, Chrome, Google Fotos y Play Store, además de tres partes del propio teléfono (Ajustes, la app de seguridad personal de Google y los Servicios de Google Play), para saber qué pantallas puede abrir. Celular Listo no puede ver la lista completa de apps del teléfono y no la pide.</li>
+        <li><strong>Ajustes</strong>, para mostrar cómo está cada uno: tamaño del texto y de visualización, texto en negrita y de alto contraste, tiempo de espera de la pantalla, el retraso al mantener presionado, giro automático, si hay bloqueo de pantalla y huella o rostro configurados (solo sí o no), si las notificaciones se muestran en la pantalla de bloqueo, copia de seguridad activada o no, modo de sonido y volumen del tono, No molestar, ubicación activada o no, si hay una SIM puesta (solo sí o no), modo de navegación, hora automática, opciones de desarrollador y depuración por USB o inalámbrica, DNS privado (y el nombre del servidor, si hay uno), la fecha de la última actualización de seguridad y el espacio libre.</li>
+        <li><strong>La marca, el modelo, la versión de Android y el número de compilación del teléfono</strong>, para mostrar los pasos de esa marca. Los tres primeros encabezan el resultado.</li>
+        <li><strong>Los nombres de algunas apps instaladas</strong>: las que tienen acceso de accesibilidad, de notificaciones, de administración del dispositivo, de teclado o de autocompletado; las apps predeterminadas de SMS, teléfono y navegador; y si está instalada una lista corta y fija de apps: cuatro apps de asistencia remota (AnyDesk, TeamViewer en sus dos versiones, RustDesk y AirDroid), WhatsApp y WhatsApp Business, Chrome, Google Fotos y Play Store, además de tres partes del propio teléfono (Ajustes, la app de seguridad personal de Google y los Servicios de Google Play), para saber qué pantallas puede abrir. De las apps con esos accesos y de las predeterminadas de SMS y teléfono también lee si venían con el teléfono; y, en Android 13 o posterior, si Android registró que una app con acceso de accesibilidad, de notificaciones o de administración del dispositivo se instaló desde un archivo y no desde una tienda. Celular Listo no puede ver la lista completa de apps del teléfono y no la pide.</li>
       </ul>
-      <p>Celular Listo nunca lee mensajes, contactos, fotos, archivos, historial de llamadas, coordenadas de ubicación, contraseñas, huellas ni nada de lo que se escribe.</p>
+      <p>Celular Listo nunca lee mensajes, contactos, fotos, historial de llamadas, coordenadas de ubicación, contraseñas, huellas ni nada de lo que escribes en otras apps. El único archivo que abre es la lista que tú eliges con «Cargar lista».</p>
     </section>
 
     <section id="guarda" aria-labelledby="guarda-titulo">
       <h2 id="guarda-titulo">Qué guarda</h2>
-      <p>Solo en el teléfono: el perfil que elegiste, las revisiones que marcaste como hechas y cuándo, las revisiones que agregaste y las notas que escribiste. Estos datos quedan fuera de la copia de seguridad de Android y del traspaso entre teléfonos.</p>
+      <p>Solo en el teléfono: el perfil que elegiste, las revisiones que elegiste para «Mi selección», las que marcaste como hechas o decidiste dejar así y cuándo, las revisiones que agregaste, las notas que escribiste y si ya viste la bienvenida. La marca de «Dejarlo así» guarda también de qué se trataba (qué app, qué servidor DNS o qué estado, por ejemplo la fecha de la última actualización de seguridad), para volver a preguntar si eso cambia. Estos datos quedan fuera de la copia de seguridad de Android y del traspaso entre teléfonos.</p>
     </section>
 
     <section id="envia" aria-labelledby="envia-titulo">
@@ -58,10 +59,10 @@
       <p>Nada. La app no tiene permiso de internet, ni cuenta, ni anuncios, ni analítica, ni reportes de fallos propios. No recogemos datos, así que no hay nada que compartir ni que vender.</p>
       <p>Dos botones entregan texto a otra app, y solo cuando tú los tocas:</p>
       <ul>
-        <li><strong>Compartir resultado</strong> entrega el resultado como texto a la app que elijas (WhatsApp, correo). Contiene los nombres de las revisiones, su estado, los nombres de las apps que aparecen en ellas y tus notas.</li>
-        <li><strong>Guardar lista</strong> escribe tu perfil, tus revisiones propias y tus notas en un archivo en el lugar que elijas.</li>
+        <li><strong>Compartir resultado</strong> entrega el resultado como texto a la app que elijas (WhatsApp, correo). Contiene la marca, el modelo y la versión de Android del teléfono, el perfil, cuántas revisiones hay en cada estado, los nombres de las revisiones, lo que se encontró en las que están por arreglar, los nombres de las apps que aparecen en ellas y tus notas.</li>
+        <li><strong>Guardar lista</strong> escribe tu perfil, las revisiones elegidas para «Mi selección», tus revisiones propias y tus notas en un archivo en el lugar que elijas.</li>
       </ul>
-      <p>Lo que pase después con ese texto depende de la app a la que lo enviaste. Los botones que dicen «Abrir en el navegador» abren una página de Google en tu navegador; Celular Listo no le pasa ningún dato.</p>
+      <p>Lo que pase después con ese texto depende de la app a la que lo enviaste. Los botones que dicen «Abrir en el navegador» abren una página de Google en tu navegador; Celular Listo no le pasa ningún dato. El botón «Leer la política de privacidad» abre esta página en tu navegador, también sin pasarle ningún dato.</p>
     </section>
 
     <section id="borrar" aria-labelledby="borrar-titulo">
@@ -71,7 +72,7 @@
 
     <section id="permisos" aria-labelledby="permisos-titulo">
       <h2 id="permisos-titulo">Permisos</h2>
-      <p><strong>Datos biométricos (USE_BIOMETRIC):</strong> permite a Celular Listo preguntarle a Android si hay una huella o un rostro registrados. Nunca muestra un aviso de huella y nunca recibe datos biométricos. Es el único permiso de la app.</p>
+      <p><strong>Datos biométricos (USE_BIOMETRIC):</strong> permite a Celular Listo preguntarle a Android si hay una huella o un rostro registrados. Nunca muestra un aviso de huella y nunca recibe datos biométricos. Es el único permiso de Android que pide la app.</p>
     </section>
 
     <section id="menores" aria-labelledby="menores-titulo">

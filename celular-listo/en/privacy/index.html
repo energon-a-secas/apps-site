@@ -42,15 +42,16 @@
     <section id="reads" aria-labelledby="reads-title">
       <h2 id="reads-title">What it reads on the phone</h2>
       <ul>
-        <li><strong>Settings</strong>, to show how each one stands: text and display size, screen timeout, whether a screen lock and a fingerprint or face are set up (yes or no only), backup on or off, sound mode and ring volume, Do Not Disturb, location on or off, navigation mode, automatic time, developer options, private DNS, the date of the last security update and free storage space.</li>
-        <li><strong>The names of some installed apps</strong>: apps that hold accessibility, notification, device administrator, keyboard or autofill access; the default SMS, phone and browser apps; and whether a short fixed list of apps is installed: four remote-support apps, WhatsApp, Chrome, Google Photos and the Play Store, plus three parts of the phone itself (Settings, Google's Personal Safety app and Google Play services), to know which screens it can open. Celular Listo cannot see the full list of apps on the phone and does not ask for it.</li>
+        <li><strong>Settings</strong>, to show how each one stands: text and display size, bold and high-contrast text, screen timeout, the touch-and-hold delay, auto-rotate, whether a screen lock and a fingerprint or face are set up (yes or no only), whether notifications show on the lock screen, backup on or off, sound mode and ring volume, Do Not Disturb, location on or off, whether a SIM is in the phone (yes or no only), navigation mode, automatic time, developer options and USB or wireless debugging, private DNS (and the server's name, if one is set), the date of the last security update and free storage space.</li>
+        <li><strong>The phone's make, model, Android version and build number</strong>, to show the steps for that brand. The first three head the result.</li>
+        <li><strong>The names of some installed apps</strong>: apps that hold accessibility, notification, device administrator, keyboard or autofill access; the default SMS, phone and browser apps; and whether a short fixed list of apps is installed: four remote-support apps (AnyDesk, TeamViewer in its two versions, RustDesk and AirDroid), WhatsApp and WhatsApp Business, Chrome, Google Photos and the Play Store, plus three parts of the phone itself (Settings, Google's Personal Safety app and Google Play services), to know which screens it can open. For apps that hold that access and for the default SMS and phone apps it also reads whether they came with the phone; and, on Android 13 or later, whether Android recorded that an app with accessibility, notification or device administrator access was installed from a file instead of a store. Celular Listo cannot see the full list of apps on the phone and does not ask for it.</li>
       </ul>
-      <p>Celular Listo never reads messages, contacts, photos, files, call history, location coordinates, passwords, fingerprints or anything typed.</p>
+      <p>Celular Listo never reads messages, contacts, photos, call history, location coordinates, passwords, fingerprints or anything you type in other apps. The only file it opens is the list you pick with "Load list".</p>
     </section>
 
     <section id="stores" aria-labelledby="stores-title">
       <h2 id="stores-title">What it stores</h2>
-      <p>On the phone only: the profile you chose, the checks you marked as done and when, the checks you added yourself, and the notes you wrote. This data is left out of Android backup and of phone-to-phone transfer.</p>
+      <p>On the phone only: the profile you chose, the checks you picked for "My own", the checks you marked as done or chose to keep and when, the checks you added yourself, the notes you wrote, and whether you have already seen the welcome screen. A "Keep it" mark also stores what it was about (which app, which DNS server, or which state, for example the date of the last security update), so the app can ask again if that changes. This data is left out of Android backup and of phone-to-phone transfer.</p>
     </section>
 
     <section id="sends" aria-labelledby="sends-title">
@@ -58,10 +59,10 @@
       <p>Nothing. The app has no internet permission, no account, no ads, no analytics and no crash reporting of its own. We collect no data, so there is nothing to share or to sell.</p>
       <p>Two buttons hand text to another app, and only when you tap them:</p>
       <ul>
-        <li><strong>Share result</strong> gives the result as plain text to the app you pick (WhatsApp, email). It contains the check names, their state, the names of the apps that appear in them, and your notes.</li>
-        <li><strong>Save list</strong> writes your profile, your own checks and your notes to a file in the place you pick.</li>
+        <li><strong>Share result</strong> gives the result as plain text to the app you pick (WhatsApp, email). It contains the phone's make, model and Android version, the profile, how many checks are in each state, the check names, what was found in the ones that need a fix, the names of the apps that appear in them, and your notes.</li>
+        <li><strong>Save list</strong> writes your profile, the checks picked for "My own", your own checks and your notes to a file in the place you pick.</li>
       </ul>
-      <p>What happens to that text afterwards depends on the app you sent it to. Buttons that say "Open in the browser" open a Google web page in your browser; Celular Listo passes it no data.</p>
+      <p>What happens to that text afterwards depends on the app you sent it to. Buttons that say "Open in the browser" open a Google web page in your browser; Celular Listo passes it no data. The "Read the privacy policy" button opens this page in your browser, also with no data passed.</p>
     </section>
 
     <section id="delete" aria-labelledby="delete-title">
@@ -71,7 +72,7 @@
 
     <section id="permissions" aria-labelledby="permissions-title">
       <h2 id="permissions-title">Permissions</h2>
-      <p><strong>Biometrics (USE_BIOMETRIC):</strong> lets Celular Listo ask Android whether a fingerprint or face is enrolled. It never shows a fingerprint prompt and never receives biometric data. It is the app's only permission.</p>
+      <p><strong>Biometrics (USE_BIOMETRIC):</strong> lets Celular Listo ask Android whether a fingerprint or face is enrolled. It never shows a fingerprint prompt and never receives biometric data. It is the only Android permission the app asks for.</p>
     </section>
 
     <section id="children" aria-labelledby="children-title">
