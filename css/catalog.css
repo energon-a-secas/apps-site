@@ -21,22 +21,8 @@
 
 /* ── Intro ─────────────────────────────────────────────────── */
 .intro { display: grid; gap: var(--space-4); }
-.intro__title, .intro__lead { max-width: 40ch; }
-.intro__lead { max-width: 64ch; }
-.intro__title {
-  font-size: clamp(1.75rem, 4.6vw, 2.75rem);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  font-weight: 700;
-  text-wrap: balance;
-}
-.intro__lead { color: var(--text-secondary); font-size: 1.125rem; line-height: 1.65; }
 
-.legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: var(--text-sm); }
-.legend > div { display: flex; align-items: center; gap: var(--space-2); }
-.legend dd { color: var(--text-secondary); }
-
-.jump { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.jump { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .jump a {
   display: inline-flex;
   align-items: center;
@@ -69,9 +55,14 @@
   white-space: nowrap;
   vertical-align: 1px;
 }
-.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.status--store { color: #86efac; border-color: rgb(134 239 172 / 35%); background: rgb(134 239 172 / 8%); }
-.status--beta { color: #fcd34d; border-color: rgb(252 211 77 / 35%); background: rgb(252 211 77 / 8%); }
+/* Próximamente: the app's own hue with neutral ink and a ring, never a warning
+   colour. An app on the store carries no pill: its App Store button says so. */
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid currentColor; }
+.status--soon {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--app-ink) 45%, transparent);
+  background: color-mix(in srgb, var(--app-hue) 14%, transparent);
+}
 
 /* ── One app ───────────────────────────────────────────────── */
 .app {
@@ -104,7 +95,7 @@
 .app__facts dt { color: var(--text-muted); }
 .app__facts dd { color: var(--text-secondary); line-height: 1.55; }
 
-.app a:not(.btn), .terms a {
+.app a:not(.btn) {
   color: var(--text-primary);
   text-decoration: underline;
   text-decoration-color: var(--app-ink, var(--accent-bright));
@@ -137,12 +128,6 @@
   box-shadow: 0 14px 30px rgb(0 0 0 / 35%);
   scroll-snap-align: start;
 }
-.shots figcaption { margin-top: var(--space-2); color: var(--text-muted); font-size: var(--text-xs); line-height: 1.5; }
-
-/* ── Agreements ────────────────────────────────────────────── */
-.terms { display: grid; gap: var(--space-3); max-width: 72ch; padding-top: 48px; border-top: 1px solid var(--border); }
-.terms__title { font-size: var(--text-xl); font-weight: 700; }
-.terms p { color: var(--text-secondary); line-height: 1.7; }
 
 /* ── Wide screens: the facts beside the screenshots ────────── */
 @media (min-width: 960px) {
@@ -161,7 +146,6 @@
   .shots__strip { margin-inline: calc(-1 * var(--pad)); padding-inline: var(--pad); scroll-padding-inline: var(--pad); }
   /* Edge to edge, an outside ring would lose its sides to the viewport. */
   .shots__strip:focus-visible { outline-offset: -3px; border-radius: 0; }
-  .legend > div { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
