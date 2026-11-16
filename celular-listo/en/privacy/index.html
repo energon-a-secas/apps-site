@@ -46,7 +46,7 @@
     <!-- neo-apps:crumb --><div class="neo-crumb-row"><nav class="neo-crumb" aria-label="Breadcrumb"><a href="../../../#celular-listo" hreflang="es">Neorgon apps</a><span class="neo-crumb__sep" aria-hidden="true">/</span><a href="../">Celular Listo</a><span class="neo-crumb__sep" aria-hidden="true">/</span><span aria-current="page">Privacy</span></nav><nav class="doc-langs" aria-label="Languages"><a href="/celular-listo/privacy/" hreflang="es" lang="es">Español</a></nav></div><!-- /neo-apps:crumb -->
     <div class="doc-head">
 <!-- draft:head -->
-    <p class="kicker">Privacy policy · In effect since 13 November 2026</p>
+    <p class="kicker">Privacy policy · In effect since 16 November 2026</p>
     <h1>What Celular Listo reads stays on your phone.</h1>
     <p class="lead">Celular Listo is a checklist for setting up an Android phone, made with an older adult's phone in mind. This page says what it reads, what it stores and what it sends. The short version: it sends nothing.</p>
 <!-- /draft:head -->
@@ -64,28 +64,31 @@
         <li><strong>The phone's make, model, Android version and build number</strong>, to show the steps for that brand. The first three head the result.</li>
         <li><strong>The names of some installed apps</strong>: apps that hold accessibility, notification, device administrator, keyboard or autofill access; the default SMS, phone and browser apps; and whether a short fixed list of apps is installed: four remote-support apps (AnyDesk, TeamViewer in its two versions, RustDesk and AirDroid), WhatsApp and WhatsApp Business, Chrome, Google Photos and the Play Store, plus three parts of the phone itself (Settings, Google's Personal Safety app and Google Play services), to know which screens it can open. For apps that hold that access and for the default SMS and phone apps it also reads whether they came with the phone; and, on Android 13 or later, whether Android recorded that an app with accessibility, notification or device administrator access was installed from a file instead of a store. Celular Listo cannot see the full list of apps on the phone and does not ask for it.</li>
       </ul>
-      <p>Celular Listo never reads messages, contacts, photos, call history, location coordinates, passwords, fingerprints or anything you type in other apps. The only file it opens is the list you pick with "Load list".</p>
+      <p>Celular Listo never reads messages, contacts, photos, call history, location coordinates, passwords, fingerprints or anything you type in other apps. The only file it opens is the list you pick with "Open a saved list".</p>
     </section>
 
     <section id="stores" aria-labelledby="stores-title">
       <h2 id="stores-title">What it stores</h2>
-      <p>On the phone only: the profile you chose, the checks you picked for "My own", the checks you marked as done or chose to keep and when, the checks you added yourself, the notes you wrote, and whether you have already seen the welcome screen. A "Keep it" mark also stores what it was about (which app, which DNS server, or which state, for example the date of the last security update), so the app can ask again if that changes. This data is left out of Android backup and of phone-to-phone transfer.</p>
+      <p>On the phone only: the profile you chose, the checks you picked for "My own", the checks you marked as done or chose to keep and when, the checks you added yourself, the notes you wrote, and whether you have already seen the welcome screen. A "Keep it" mark also stores what it was about (which app, which DNS server, or which state, for example the date of the last security update), so the app can ask again if that changes. It also keeps how every check stood the last time the app was opened and at the visit before that (needs a fix, check by hand, fine or not on this phone), each with its date and the Android version, so the Summary can say what changed since last time; like a "Keep it" mark, a row about one app, one DNS server or one state carries that name. This data is left out of Android backup and of phone-to-phone transfer.</p>
     </section>
 
     <section id="sends" aria-labelledby="sends-title">
       <h2 id="sends-title">What it sends</h2>
       <p>Nothing. The app has no internet permission, no account, no ads, no analytics and no crash reporting of its own. We collect no data, so there is nothing to share or to sell.</p>
-      <p>Two buttons hand text to another app, and only when you tap them:</p>
+      <p>Five buttons hand something to another app, and only when you tap them:</p>
       <ul>
-        <li><strong>Share result</strong> gives the result as plain text to the app you pick (WhatsApp, email). It contains the phone's make, model and Android version, the profile, how many checks are in each state, the check names, what was found in the ones that need a fix, the names of the apps that appear in them, and your notes.</li>
+        <li><strong>Share result</strong> gives the result as plain text to the app you pick (WhatsApp, email). It contains the date, the app's version, the phone's make, model and Android version, the profile, how many checks are in each state, the check names, what was found in the ones that need a fix, in the ones left for you to decide and in the ones you chose to keep, the names of the apps that appear in them, the date you marked each one as done or chose to keep it, and your notes.</li>
         <li><strong>Save list</strong> writes your profile, the checks picked for "My own", your own checks and your notes to a file in the place you pick.</li>
+        <li><strong>Do the steps not match this phone? Tell us</strong> prepares an email in your email app, addressed to contact@neorgon.com, and shows it to you first. It contains the app's version, the name of the check, the phone's make, model, Android version and build number, the language, which steps were shown, where the button led and the search word. It goes out only if you send it. If you do, we receive it with your address, like any email: we use it to correct the steps and to answer you, and we do not share it.</li>
+        <li><strong>Remind me to check again</strong> hands your calendar app a reminder for a month from now, with a fixed title and description. You save it there, or not. Celular Listo does not read or write your calendar.</li>
+        <li><strong>Share the blank sheet</strong> hands over an empty recovery sheet, the same for everyone: nothing in it is read from the phone.</li>
       </ul>
-      <p>What happens to that text afterwards depends on the app you sent it to. Buttons that say "Open in the browser" open a Google web page in your browser; Celular Listo passes it no data. The "Read the privacy policy" button opens this page in your browser, also with no data passed.</p>
+      <p>What happens to it afterwards depends on the app you handed it to. Buttons that say "Open in the browser" open a Google web page in your browser; Celular Listo passes it no data. The "Read the privacy policy" button opens this page in your browser, also with no data passed. Buttons that say "Open the app" open another app on its first screen, with no data passed either. When a button reaches the settings search and not the exact screen, or when you tap the word under it, Celular Listo copies the word to search for to the clipboard: a fixed word from the app, nothing read from the phone.</p>
     </section>
 
     <section id="delete" aria-labelledby="delete-title">
       <h2 id="delete-title">How long, and how to delete it</h2>
-      <p>The data is on your phone for as long as you leave it there. "Undo" removes a mark, and a note is deleted by editing it. To delete everything, uninstall the app or use "Clear data" in Android's app settings. We hold no copy of anything, so there is nothing to ask us to delete.</p>
+      <p>The data is on your phone for as long as you leave it there. "Remove the mark" removes a mark, and a note is deleted by editing it. To delete everything, uninstall the app or use "Clear data" in Android's app settings. We hold no copy of anything, so there is nothing to ask us to delete.</p>
     </section>
 
     <section id="permissions" aria-labelledby="permissions-title">
