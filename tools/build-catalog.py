@@ -25,17 +25,29 @@ images), and with --check reports drift instead.
 It refuses a screenshot without alt text or a caption, and it never writes a
 relative age ("Nueva", "latest") or a release word into a page.
 """
+import hashlib
 import json
 import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from appdata import (FORBIDDEN, GROUPS, LABELS, ORIGIN, SITE, STATUS_LABEL, by_id,  # noqa: E402
-                     category_icon, crumb, esc, family, load, local, ordered, page_for,
-                     replace_block)
+from appdata import (CREDIT, FORBIDDEN, GROUPS, LICENCE, ORIGIN, SITE, STATUS_LABEL,  # noqa: E402
+                     by_id, category_icon, contrast, crumb, esc, family, group_label, load,
+                     local, ordered, page_for, replace_block, tints)
 
 FROZEN = ('amigos/',)
+# Amigos de Enerbot's pages as App Review reads them (64f3b85). --check fails on
+# any change to them until the freeze is lifted on purpose, here.
+FROZEN_SHA256 = {
+    'amigos/index.html': 'd92e8dcfbe42b2b8d0268bf497cdf68a7d34f08d92edbfd2a756d87831256c38',
+    'amigos/privacy/index.html': 'a9e8d07d3061d10e59008ded8eed1406b84a0e99325e87b846a021449916be20',
+}
+REGISTRY = SITE.parent.parent / 'docs' / 'site-registry.json'
+CONTACT = 'contact@neorgon.com'
+CHEVRON = ('<svg class="chip__go" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">'
+           '<path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" '
+           'stroke-linecap="round" stroke-linejoin="round"/></svg>')
 EXTERNAL_ARROW = ('<svg class="cta__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">'
                   '<path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" '
                   'stroke-linecap="round" stroke-linejoin="round"/></svg>')
@@ -64,7 +76,8 @@ def guard(name, markup):
 
 def shelf(data, root='', size=72, heading=True):
     groups = []
-    for status, label in GROUPS:
+    for status, _ in GROUPS:
+        label = {'es': group_label(data, status)}
         apps = [a for a in ordered(data) if (a['status'] == 'available') == (status == 'available')]
         if not apps:
             continue
@@ -88,17 +101,21 @@ def chips(data, app):
     cat = app['category']
     label = data['categories'][cat]['es']
     icon = category_icon(cat)
-    out = [f'<li><a class="chip chip--category" href="https://neorgon.com/{cat}/">{icon}<span>{esc(label)}</span></a></li>']
-    out += [f'<li><span class="chip">{esc(p)}</span></li>' for p in app['platforms']]
-    out += [f'<li><span class="chip">{esc(t)}</span></li>' for t in app.get('traits', [])]
-    return ''.join(out)
+    # The one chip that is a link: to the category's page on the hub, which
+    # ships with this catalog. The name keeps the visible label first.
+    link = (f'<a class="chip chip--category" href="https://neorgon.com/{cat}/" '
+            f'aria-label="{esc(label)} en Neorgon">{icon}<span>{esc(label)}</span>{CHEVRON}</a>')
+    # The platform and the traits as one line of facts; the line breaks after a dot.
+    sep = '<span class="band__sep" aria-hidden="true">&nbsp;·</span> '
+    facts = sep.join(esc(f) for f in app['platforms'] + app.get('traits', []))
+    return f'<p class="band__category">{link}</p><p class="band__facts">{facts}</p>'
 
 
 def action(app):
     """One primary action: the store, the web version, or a note to be told."""
     if app['status'] == 'available' and app.get('store'):
         return (f'<a class="cta" href="{app["store"]["url"]}" rel="noreferrer">'
-                f'Descargar en el {esc(app["store"]["name"])}{EXTERNAL_ARROW}</a>')
+                f'Descargar en el {esc(app["store"]["name"])}</a>')
     if app.get('web'):
         return f'<a class="cta" href="{app["web"]}" rel="noreferrer">Úsala en la web{EXTERNAL_ARROW}</a>'
     if app.get('contact'):
@@ -127,35 +144,40 @@ def stage(app, eager):
     if not app.get('screenshots'):
         return ''
     loading = '' if eager else ' loading="lazy"'
+    # No link around a frame: the file is the size it already shows. The strip
+    # itself takes focus, so the arrow keys scroll it.
     frames = ''.join(
         f'\n            <li class="stage__frame"><figure>'
-        f'<a class="stage__shot" href="{s["src"]}"><img src="{s["src"]}" alt="{esc(s["alt"])}" '
-        f'width="480" height="1043"{loading} decoding="async"></a>'
+        f'<img class="stage__shot" src="{s["src"]}" alt="{esc(s["alt"])}" '
+        f'width="480" height="1043"{loading} decoding="async">'
         f'<figcaption>{esc(s["caption"])}</figcaption></figure></li>'
         for s in app['screenshots'])
     return (f'\n        <div class="stage" role="region" aria-label="Capturas de {esc(app["name"])}">'
-            f'\n          <ol class="stage__strip">{frames}\n          </ol>\n        </div>')
+            f'\n          <ol class="stage__strip" tabindex="0">{frames}\n          </ol>\n        </div>')
 
 
 def band(data, app, first):
     featured = ' band--featured' if app.get('featured') else ''
     compact = '' if app.get('screenshots') else ' band--compact'
-    size = 152 if app.get('featured') else 128
+    soon = '' if app['status'] == 'available' else ' band--soon'
+    size = 128 if app.get('featured') else 112
+    # The group heading already says Próximamente; a pill is only for a state
+    # the heading does not say (an open test).
     pill = ''
-    if app['status'] != 'available':
+    if app['status'] == 'test':
         pill = (f'<span class="pill" data-state="{app["status"]}"><span class="pill__glyph" aria-hidden="true">'
                 f'</span>{STATUS_LABEL["es"][app["status"]]}</span>')
     act = action(app)
     act = f'\n          <p class="band__action">{act}</p>' if act else ''
     return (
-        f'\n    <article class="band{featured}{compact}" id="{app["id"]}" data-app="{app["id"]}" '
+        f'\n    <article class="band{featured}{compact}{soon}" id="{app["id"]}" data-app="{app["id"]}" '
         f'aria-labelledby="{app["id"]}-name">'
         f'\n      <div class="band__inner">'
         f'\n        <div class="band__info">'
         f'\n          <img class="band__icon" src="{app["icon"]}" alt="" width="{size}" height="{size}">'
         f'\n          <div class="band__title"><h3 class="band__name" id="{app["id"]}-name">{esc(app["name"])}</h3>{pill}</div>'
         f'\n          <p class="band__promise">{esc(app["promise"])}</p>'
-        f'\n          <ul class="band__chips">{chips(data, app)}</ul>{act}'
+        f'\n          <div class="band__chips">{chips(data, app)}</div>{act}'
         f'\n          {meta_row(app)}'
         f'\n        </div>{stage(app, first)}'
         f'\n      </div>'
@@ -165,7 +187,7 @@ def band(data, app, first):
 def catalog(data):
     parts = [shelf(data)]
     first = True
-    for status, label in GROUPS:
+    for status, _ in GROUPS:
         apps = [a for a in ordered(data) if (a['status'] == 'available') == (status == 'available')]
         if not apps:
             continue
@@ -174,9 +196,64 @@ def catalog(data):
         first = False
         parts.append(
             f'\n  <section class="group group--{status}" aria-labelledby="group-{status}">'
-            f'\n    <h2 class="group__title{hidden}" id="group-{status}">{label["es"]}</h2>{bands}'
+            f'\n    <h2 class="group__title{hidden}" id="group-{status}">{group_label(data, status)}</h2>{bands}'
             f'\n  </section>')
+    # The licence, the art credit and the address, once, as links that look like links.
+    parts.append(f'\n  <p class="catalog-legal">{LICENCE["es"]} {CREDIT["es"]} '
+                 f'Escríbenos a <a href="mailto:{CONTACT}">{CONTACT}</a>.</p>')
     return guard('index.html catalog', ''.join(parts) + '\n  ')
+
+
+def og_alt(data):
+    names = [a['name'] for a in ordered(data)]
+    listed = ', '.join(names[:-1]) + ' y ' + names[-1]
+    return f'Los íconos de {listed}, con el título Apps de Neorgon'
+
+
+def og_meta(data):
+    alt = esc(og_alt(data))
+    return (f'\n  <meta property="og:image" content="{ORIGIN}og-preview.jpg">'
+            f'\n  <meta property="og:image:width" content="1200">'
+            f'\n  <meta property="og:image:height" content="630">'
+            f'\n  <meta property="og:image:alt" content="{alt}">'
+            f'\n  <meta name="twitter:image" content="{ORIGIN}og-preview.jpg">'
+            f'\n  <meta name="twitter:image:alt" content="{alt}">\n  ')
+
+
+def og_card(data):
+    """tools/og-card.html: the share image's composition, 1200x630. Render it
+    with a headless browser at that size and save it as og-preview.jpg (the
+    README names the command). Icons and band colours come from the data."""
+    cols = []
+    for app in ordered(data):
+        band, stage = tints(app['hue'])
+        cols.append(f'<li style="--band:{band};--stage:{stage}"><img src="../{app["icon"]}" alt="" '
+                    f'width="120" height="120"></li>')
+    return f'''<!doctype html>
+<!-- Generated by tools/build-catalog.py from data/apps.json: the share image for
+     apps.neorgon.com. Rendered at 1200x630 into og-preview.jpg. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Apps de Neorgon</title>
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  html, body {{ width: 1200px; height: 630px; overflow: hidden; }}
+  body {{ background: #040714; color: #f9f9f9; font-family: 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
+  h1 {{ position: absolute; left: 80px; top: 92px; font-size: 76px; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }}
+  p {{ position: absolute; left: 82px; top: 190px; color: #cacaca; font-size: 30px; font-weight: 500; }}
+  ul {{ position: absolute; left: 0; right: 0; bottom: 0; height: 330px; display: grid; grid-template-columns: repeat({len(cols)}, 1fr); list-style: none; }}
+  li {{ display: grid; place-items: center; background: linear-gradient(180deg, var(--stage), var(--band) 70%); border-top: 2px solid color-mix(in oklab, var(--stage) 60%, #fff); }}
+  img {{ width: 120px; height: 120px; border-radius: 22.5%; filter: drop-shadow(0 14px 22px rgb(0 0 0 / 50%)); }}
+</style>
+</head>
+<body>
+<h1>Apps de Neorgon</h1>
+<p>apps.neorgon.com</p>
+<ul>{"".join(cols)}</ul>
+</body>
+</html>
+'''
 
 
 def jsonld(data):
@@ -213,9 +290,52 @@ def apps_css(data):
     lines = ['/* Generated by tools/build-catalog.py from data/apps.json: each app\'s hue,',
              '   read from its icon, and a light tint of it (ink) for text and rules on the',
              '   dark page. Edit the data and run the tool; a hand edit here is overwritten. */']
+    lines.append('/* --app-band and --app-stage keep the hue\'s own angle and chroma at a low')
+    lines.append('   lightness (tools/appdata.py tints()), so every band shows its colour. */')
     for app in data['apps']:
-        lines.append(f'[data-app="{app["id"]}"] {{ --app-hue: {app["hue"]}; --app-ink: {app["ink"]}; }}')
+        band, stage = tints(app['hue'])
+        lines.append(f'[data-app="{app["id"]}"] {{ --app-hue: {app["hue"]}; --app-ink: {app["ink"]}; '
+                     f'--app-band: {band}; --app-stage: {stage}; }}')
     return '\n'.join(lines) + '\n'
+
+
+def colour_problems(data):
+    """Text on every band and stage at 4.5:1 or better, and the ink as a
+    button fill under dark text."""
+    out = []
+    for app in data['apps']:
+        band, stage = tints(app['hue'])
+        for name, fg, bg, floor in (('text on band', '#f9f9f9', band, 7), ('secondary on band', '#cacaca', band, 4.5),
+                                    ('text on stage', '#f9f9f9', stage, 4.5), ('ink on band', app['ink'], band, 4.5),
+                                    ('button text on ink', '#0a0c14', app['ink'], 4.5)):
+            ratio = contrast(fg, bg)
+            if ratio < floor:
+                out.append(f'{app["id"]}: {name} is {ratio:.2f}:1 ({fg} on {bg})')
+    return out
+
+
+def frozen_problems():
+    out = []
+    for rel, want in FROZEN_SHA256.items():
+        got = hashlib.sha256((SITE / rel).read_bytes()).hexdigest()
+        if got != want:
+            out.append(f'{rel} changed while frozen (App Review reads it)')
+    return out
+
+
+def registry_problems(data):
+    """The category labels match the fleet registry's, when the monorepo is here."""
+    if not REGISTRY.is_file():
+        return []
+    groups = {g['id']: g for g in json.loads(REGISTRY.read_text(encoding='utf-8')).get('groups', [])}
+    out = []
+    for cat, labels in data['categories'].items():
+        g = groups.get(cat)
+        if not g:
+            out.append(f'category {cat} is not in the registry')
+        elif (g.get('label_es'), g.get('label')) != (labels['es'], labels['en']):
+            out.append(f'category {cat}: {labels} differs from the registry ({g.get("label_es")}, {g.get("label")})')
+    return out
 
 
 def llms(data):
@@ -223,11 +343,11 @@ def llms(data):
            '> Las apps de Neorgon para iPhone y Android, en https://apps.neorgon.com/ (en español).',
            '> Cada app tiene su ayuda y su política de privacidad; las de Naninani y Kurukuru',
            '> están en sus propios sitios.', '']
-    for status, label in GROUPS:
+    for status, _ in GROUPS:
         apps = [a for a in ordered(data) if (a['status'] == 'available') == (status == 'available')]
         if not apps:
             continue
-        out += [f'## {label["es"]}', '']
+        out += [f'## {group_label(data, status)}', '']
         for app in apps:
             cat = data['categories'][app['category']]['es']
             facts = app['platforms'] + [cat] + app.get('traits', [])
@@ -372,9 +492,11 @@ def outputs(data):
     index = (SITE / 'index.html').read_text(encoding='utf-8')
     index = replace_block(index, 'catalog', catalog(data), 'index.html')
     index = replace_block(index, 'catalog-jsonld', jsonld(data), 'index.html')
+    index = replace_block(index, 'catalog-og', og_meta(data), 'index.html')
     files['index.html'] = index
+    files['tools/og-card.html'] = og_card(data)
     nf = (SITE / '404.html').read_text(encoding='utf-8')
-    nf = replace_block(nf, 'catalog-shelf', guard('404.html', shelf(data, root='/', size=64, heading=False) + '\n    '), '404.html')
+    nf = replace_block(nf, 'catalog-shelf', guard('404.html', shelf(data, root='/', size=72, heading=False) + '\n    '), '404.html')
     nf = replace_block(nf, 'catalog-pages', notfound_pages(data), '404.html')
     files['404.html'] = nf
     files['css/apps.css'] = apps_css(data)
@@ -409,6 +531,10 @@ def main(argv):
             if not check:
                 path.write_text(text, encoding='utf-8')
     stale += stamp_docs(data, write=not check)
+    problems = colour_problems(data) + frozen_problems() + registry_problems(data)
+    if problems:
+        print('\n'.join(problems))
+        return 1
     if check:
         if stale:
             print('stale: ' + ', '.join(stale) + ' (run python3 tools/build-catalog.py)')

@@ -88,7 +88,8 @@
       "contact": "contact@neorgon.com",
       "hue": "#17a2b8",
       "ink": "#8fdbe6",
-      "skin": "",
+      "skin": "aurora",
+      "credit": "enerbot",
       "icon": "assets/icons/enerbot-doll.webp",
       "icon_png": "assets/icons/enerbot-doll.png",
       "screenshots": [
@@ -176,6 +177,7 @@
       "hue": "#8c37a8",
       "ink": "#d9a0ec",
       "skin": "",
+      "credit": "enerbot",
       "icon": "assets/icons/amigos.webp",
       "icon_png": "assets/icons/amigos.png",
       "screenshots": []

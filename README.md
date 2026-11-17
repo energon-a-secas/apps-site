@@ -90,8 +90,10 @@ site's business: they live in the app repos' release docs.
 | A category icon | copy it from `packages/neorgon-ui/fleet/icons/<id>.svg` into `assets/categories/`; without one the chip shows its label alone |
 | Pittari, Enerbot Doll or Celular Listo revised their pages | `python3 tools/import-pages.py pittari ../qrpass-ios/docs/app-store/1.0/pages` (or `enerbot-doll ../robodoll-ios/docs/app-store/1.0.0/pages`, or `celular-listo ../phonecheck-android/docs/play-store/pages`); a draft's words are kept, the shell around them is this site's |
 | The page shell changed (`import-pages.py`, `doc.css`, `family.css`) | `python3 tools/import-pages.py --rewrap all`, which takes each page's words from the page itself; `--rewrap all --check` exits 1 when a page is out of date |
-| Amigos de Enerbot's pages | frozen while its first version is in App Review: both tools refuse to write `amigos/`. Import its drafts once the review is over |
+| Amigos de Enerbot's pages | frozen while its first version is in App Review: both tools refuse to write `amigos/`, and `build-catalog.py --check` fails when either page differs from the copy App Review read (`FROZEN_SHA256`). Import its drafts once the review is over, and drop the hashes then |
 | HeadPain's data handling changed | `headpain/privacy/index.html` is this site's own, written by hand from `projects/headpain-ios`; `--rewrap` changes only its shell. The face scan needs a new version of the policy before it ships |
+| The share image | `python3 tools/build-catalog.py` rewrites `tools/og-card.html` from the data; serve the site, open it at 1200x630 in a headless browser and save the screenshot as `og-preview.jpg` (JPEG); `og:image:alt` is written from the same data |
+| A field `data/apps.json` does not know | add it to `APP_KEYS` in `tools/appdata.py`, or the tool refuses it; release fields (build, review, version, beta, dates) are refused outright, and so are review, beta and relative-age words in any name, promise, trait, caption or alt text |
 | The crumb and shelf on Kurukuru's pages | `python3 tools/build-catalog.py --stamp-family` writes them into `../hobbyorbit-site/kurukuru/`, with copies of the icons and `css/family.css` (that site allows only its own images); `--stamp-family --check` reports drift |
 
 Amigos has no screenshots in the catalog until the store set, or a demo

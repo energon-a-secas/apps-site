@@ -23,42 +23,45 @@
       line-height: 1.5;
     }
     main { width: min(100% - 32px, 44rem); margin: 0 auto; padding: clamp(40px, 9vh, 96px) 0 64px; }
-    .code { margin: 0; font-size: clamp(3.5rem, 14vw, 5.5rem); font-weight: 800; line-height: 1;
-            letter-spacing: -.04em; color: #e08fdf; }
-    h1 { margin: 16px 0 8px; font-size: 1.75rem; line-height: 1.2; font-weight: 700; }
+    h1 { margin: 0 0 8px; font-size: clamp(1.75rem, 6vw, 2.25rem); line-height: 1.15; font-weight: 700; letter-spacing: -.015em; }
     .lead { margin: 0 0 24px; max-width: 34rem; color: #cacaca; font-size: 1rem; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 48px; }
-    .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border-radius: 12px;
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 14px;
            font-weight: 650; font-size: 1rem; text-decoration: none; }
-    .btn--primary { background: #cd60cc; color: #12051a; }
-    .btn--primary:hover { background: #d97bd8; }
+    .btn--primary { background: #f9f9f9; color: #040714; }
+    .btn--primary:hover { background: #ffffff; }
     .btn--quiet { color: #f9f9f9; border: 1px solid rgb(255 255 255 / 30%); }
     .btn--quiet:hover { background: rgb(255 255 255 / 8%); }
     h2 { margin: 0 0 16px; font-size: 1.25rem; font-weight: 700; }
     .shelf { margin: 0 0 48px; }
     .shelf__inner { display: flex; flex-wrap: wrap; gap: 24px 40px; }
-    .shelf__label { margin: 0 0 12px; color: #cacaca; font-size: .875rem; font-weight: 600; }
-    .shelf__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 76px); gap: 12px; }
-    .shelf__group--available .shelf__grid { grid-template-columns: repeat(3, 76px); }
-    .shelf__app { display: grid; justify-items: center; gap: 6px; padding: 6px 2px; border-radius: 14px;
-                  color: #f9f9f9; text-decoration: none; font-size: .875rem; line-height: 1.25; text-align: center; }
-    .shelf__app img { width: 64px; height: 64px; border-radius: 22.5%; }
+    .shelf__label { margin: 0 0 10px; color: #cacaca; font-size: .875rem; font-weight: 600; }
+    .shelf__grid { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 96px; gap: 8px; }
+    .shelf__app { display: grid; justify-items: center; align-content: start; gap: 8px; height: 100%; padding: 8px 4px 10px; border-radius: 18px;
+                  color: #f9f9f9; text-decoration: none; font-size: .875rem; font-weight: 600; line-height: 1.25; text-align: center; }
+    .shelf__app img { width: 72px; height: 72px; border-radius: 22.5%; filter: drop-shadow(0 6px 14px rgb(0 0 0 / 45%)); }
+    .shelf__app:hover { background: rgb(255 255 255 / 6%); }
     .shelf__app:hover .shelf__name { text-decoration: underline; text-underline-offset: .2em; }
     .pages { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgb(255 255 255 / 12%); }
     .pages li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; min-height: 52px;
                 padding: 4px 0; border-bottom: 1px solid rgb(255 255 255 / 12%); }
     .pages .app { flex: 1 1 10rem; font-weight: 650; }
     .pages a { display: inline-flex; align-items: center; min-height: 44px; color: #f9f9f9;
-               text-decoration: underline; text-decoration-color: #e08fdf; text-underline-offset: .2em; }
+               text-decoration: underline; text-decoration-color: rgb(255 255 255 / 45%); text-underline-offset: .2em; }
+    .pages a:hover { text-decoration-color: currentColor; text-decoration-thickness: 2px; }
     .pages .lang { display: inline-block; margin-left: .3em; color: #cacaca; }
-    :focus-visible { outline: 2px solid #e08fdf; outline-offset: 3px; border-radius: 4px; }
+    :focus-visible { outline: 2px solid #f9f9f9; outline-offset: 3px; border-radius: 4px; }
     .shelf__app:focus-visible { border-radius: 14px; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
                clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     @media (max-width: 480px) {
       .shelf__inner { display: block; }
       .shelf__group + .shelf__group { margin-top: 20px; }
-      .shelf__grid, .shelf__group--available .shelf__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .shelf__grid { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 4px; }
+      .shelf__app { padding: 6px 2px 8px; }
+      .shelf__app img { width: 64px; height: 64px; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; }
       .pages li { padding: 10px 0 4px; }
       .pages .app { flex-basis: 100%; }
     }
@@ -69,9 +72,8 @@
 </head>
 <body>
   <main>
-    <p class="code">404</p>
     <h1>Esta página no está aquí</h1>
-    <p class="lead">El enlace puede ser antiguo, o la dirección puede tener un error.</p>
+    <p class="lead">El enlace puede ser antiguo o la dirección puede tener un error.</p>
     <p class="actions"><a class="btn btn--primary" href="/">Volver a Apps de Neorgon</a><a class="btn btn--quiet" href="https://neorgon.com/">Todo Neorgon</a></p>
     <h2>¿Buscabas una de estas apps?</h2>
     <!-- Written by tools/build-catalog.py from data/apps.json: edit the data, not the blocks. -->
@@ -81,18 +83,18 @@
       <div class="shelf__group shelf__group--available">
         <p class="shelf__label" id="shelf-available">En el App Store</p>
         <ul class="shelf__grid" aria-labelledby="shelf-available">
-          <li><a class="shelf__app" href="/#pittari"><img src="/assets/icons/pittari.webp" alt="" width="64" height="64"><span class="shelf__name">Pittari</span></a></li>
-          <li><a class="shelf__app" href="/#naninani"><img src="/assets/icons/naninani.webp" alt="" width="64" height="64"><span class="shelf__name">Naninani</span></a></li>
-          <li><a class="shelf__app" href="/#enerbot-doll"><img src="/assets/icons/enerbot-doll.webp" alt="" width="64" height="64"><span class="shelf__name">Enerbot Doll</span></a></li>
+          <li><a class="shelf__app" href="/#pittari"><img src="/assets/icons/pittari.webp" alt="" width="72" height="72"><span class="shelf__name">Pittari</span></a></li>
+          <li><a class="shelf__app" href="/#naninani"><img src="/assets/icons/naninani.webp" alt="" width="72" height="72"><span class="shelf__name">Naninani</span></a></li>
+          <li><a class="shelf__app" href="/#enerbot-doll"><img src="/assets/icons/enerbot-doll.webp" alt="" width="72" height="72"><span class="shelf__name">Enerbot Doll</span></a></li>
         </ul>
       </div>
       <div class="shelf__group shelf__group--soon">
         <p class="shelf__label" id="shelf-soon">Próximamente</p>
         <ul class="shelf__grid" aria-labelledby="shelf-soon">
-          <li><a class="shelf__app" href="/#kurukuru"><img src="/assets/icons/kurukuru.webp" alt="" width="64" height="64"><span class="shelf__name">Kurukuru</span></a></li>
-          <li><a class="shelf__app" href="/#headpain"><img src="/assets/icons/headpain.webp" alt="" width="64" height="64"><span class="shelf__name">HeadPain</span></a></li>
-          <li><a class="shelf__app" href="/#amigos"><img src="/assets/icons/amigos.webp" alt="" width="64" height="64"><span class="shelf__name">Amigos de Enerbot</span></a></li>
-          <li><a class="shelf__app" href="/#celular-listo"><img src="/assets/icons/celular-listo.webp" alt="" width="64" height="64"><span class="shelf__name">Celular Listo</span></a></li>
+          <li><a class="shelf__app" href="/#kurukuru"><img src="/assets/icons/kurukuru.webp" alt="" width="72" height="72"><span class="shelf__name">Kurukuru</span></a></li>
+          <li><a class="shelf__app" href="/#headpain"><img src="/assets/icons/headpain.webp" alt="" width="72" height="72"><span class="shelf__name">HeadPain</span></a></li>
+          <li><a class="shelf__app" href="/#amigos"><img src="/assets/icons/amigos.webp" alt="" width="72" height="72"><span class="shelf__name">Amigos de Enerbot</span></a></li>
+          <li><a class="shelf__app" href="/#celular-listo"><img src="/assets/icons/celular-listo.webp" alt="" width="72" height="72"><span class="shelf__name">Celular Listo</span></a></li>
         </ul>
       </div>
     </div>
