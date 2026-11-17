@@ -58,6 +58,7 @@
        See packages/neorgon-ui/beacon/README.md. -->
   <meta name="neo-repo" content="https://github.com/energon-a-secas/apps-site">
   <meta name="beacon-site" content="apps-site">
+  <meta name="neo-category" content="neorgon">
   <link rel="stylesheet" href="css/neorgon-beacon.css">
   <script defer src="js/neorgon-beacon.js"></script>
   <!-- Written by tools/build-catalog.py from data/apps.json: edit the data, not the block. -->
@@ -375,6 +376,16 @@
 
   <footer class="neo-footer" data-footer-mode="minimal">
     <p>&copy; <span data-neo-year>2026</span> Neorgon</p>
+    <!-- neo-fleet:more -->
+    <nav class="neo-more" aria-label="Más en Neorgon" data-category="neorgon" data-label-en="Neorgon" data-label-es="Neorgon">
+      <span class="neo-more__label" aria-hidden="true"><svg class="neo-more__icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8.5 12h12.2V7L12 2 3.3 7v10l8.7 5 7-4"/></svg><span class="neo-more__title">Más en Neorgon</span></span>
+      <ul class="neo-more__list">
+        <li><a href="https://antenne.neorgon.com/">Antenne</a></li>
+        <li><a href="https://rewind.neorgon.com/">Rewind</a></li>
+        <li><a class="neo-more__all" href="https://neorgon.com/neorgon/">Todo en Neorgon</a></li>
+      </ul>
+    </nav>
+    <!-- /neo-fleet:more -->
   </footer>
 
 </body>
