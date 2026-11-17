@@ -182,7 +182,7 @@ def category_icon(cat_id):
         return ''
     svg = path.read_text(encoding='utf-8').strip()
     svg = re.sub(r'\s*\n\s*', '', svg)
-    return svg.replace('<svg ', '<svg class="chip__icon" aria-hidden="true" focusable="false" width="16" height="16" ', 1)
+    return svg.replace('<svg ', '<svg class="neo-chip__icon" aria-hidden="true" focusable="false" width="16" height="16" ', 1)
 
 
 def crumb(lang, app, page_root, catalog_href, privacy=False, langs_nav=''):

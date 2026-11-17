@@ -187,13 +187,19 @@ def page(data, app_id, cfg, parts, meta, privacy, sub='', editions=(), original=
 
     if original is not None:
         # A hand-written page keeps everything above <main> as it was, plus the
-        # two stylesheets the shell needs.
+        # stylesheets the shell needs.
         top = original[:original.index('<main')]
         if 'css/family.css' not in top:
             top = top.replace(f'<link rel="stylesheet" href="{root}css/doc.css">',
                               f'<link rel="stylesheet" href="{root}css/doc.css">\n'
                               f'  <link rel="stylesheet" href="{root}css/family.css">\n'
                               f'  <link rel="stylesheet" href="{root}css/apps.css">', 1)
+        # The Parts Kit (the crumb) goes after doc.css, family.css and apps.css,
+        # so its rules win over .doc-main a.
+        if 'css/neorgon-parts.css' not in top:
+            top = top.replace(f'<link rel="stylesheet" href="{root}css/apps.css">',
+                              f'<link rel="stylesheet" href="{root}css/apps.css">\n'
+                              f'  <link rel="stylesheet" href="{root}css/neorgon-parts.css">', 1)
         top = re.sub(r'<body class="doc doc--[\w-]+"[^>]*>', f'<body class="doc doc--{app_id}" data-app="{app_id}">', top, 1)
         return top + main + '\n' + foot + '</body>\n</html>\n'
 
@@ -243,6 +249,7 @@ def page(data, app_id, cfg, parts, meta, privacy, sub='', editions=(), original=
   <link rel="stylesheet" href="{root}css/doc.css">
   <link rel="stylesheet" href="{root}css/family.css">
   <link rel="stylesheet" href="{root}css/apps.css">
+  <link rel="stylesheet" href="{root}css/neorgon-parts.css">
 </head>
 <body class="doc doc--{app_id}" data-app="{app_id}">
   <a class="skip-link" href="#main">{cfg["skip"]}</a>

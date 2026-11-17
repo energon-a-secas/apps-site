@@ -20,7 +20,10 @@ Outputs, all committed so the site needs no build step:
 --stamp-family writes the crumb and the family shelf into the Kurukuru help
 pages on hobbyorbit-site (HOST defaults to ../hobbyorbit-site), copies the app
 icons and css/family.css beside them (that site's CSP allows only its own
-images), and with --check reports drift instead.
+images), links the Parts Kit's css/neorgon-parts.css after family.css (the
+host vendors it with packages/neorgon-ui/sync-parts.sh), and with --check
+reports drift instead, a page without that link or a host without the file
+included.
 
 It refuses a screenshot without alt text or a caption, and it never writes a
 relative age ("Nueva", "latest") or a release word into a page.
@@ -45,7 +48,7 @@ FROZEN_SHA256 = {
 }
 REGISTRY = SITE.parent.parent / 'docs' / 'site-registry.json'
 CONTACT = 'contact@neorgon.com'
-CHEVRON = ('<svg class="chip__go" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">'
+CHEVRON = ('<svg class="neo-chip__go" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false">'
            '<path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" '
            'stroke-linecap="round" stroke-linejoin="round"/></svg>')
 EXTERNAL_ARROW = ('<svg class="cta__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">'
@@ -103,8 +106,8 @@ def chips(data, app):
     icon = category_icon(cat)
     # The one chip that is a link: to the category's page on the hub, which
     # ships with this catalog. The name keeps the visible label first.
-    link = (f'<a class="chip chip--category" href="https://neorgon.com/{cat}/" '
-            f'aria-label="{esc(label)} en Neorgon">{icon}<span>{esc(label)}</span>{CHEVRON}</a>')
+    link = (f'<a class="neo-chip neo-chip--category" href="https://neorgon.com/{cat}/" '
+            f'aria-label="{esc(label)} en Neorgon">{icon}<span class="neo-chip__label">{esc(label)}</span>{CHEVRON}</a>')
     # The platform and the traits as one line of facts; the line breaks after a dot.
     sep = '<span class="band__sep" aria-hidden="true">&nbsp;·</span> '
     facts = sep.join(esc(f) for f in app['platforms'] + app.get('traits', []))
@@ -165,7 +168,7 @@ def band(data, app, first):
     # the heading does not say (an open test).
     pill = ''
     if app['status'] == 'test':
-        pill = (f'<span class="pill" data-state="{app["status"]}"><span class="pill__glyph" aria-hidden="true">'
+        pill = (f'<span class="neo-pill" data-state="{app["status"]}"><span class="neo-pill__glyph" aria-hidden="true">'
                 f'</span>{STATUS_LABEL["es"][app["status"]]}</span>')
     act = action(app)
     act = f'\n          <p class="band__action">{act}</p>' if act else ''
@@ -448,6 +451,20 @@ HOSTED = {
 }
 HOSTED_ASSETS = 'kurukuru/apps/'
 HOSTED_CSS = 'kurukuru/family.css'
+# The crumb's rules are the Parts Kit's, vendored on the host by
+# packages/neorgon-ui/sync-parts.sh --to <host>, never copied from here.
+HOSTED_PARTS = 'css/neorgon-parts.css'
+
+
+def parts_link(text, rel):
+    """The host page with the Parts Kit linked right after family.css."""
+    link = f'<link rel="stylesheet" href="{"../" * rel.count("/")}{HOSTED_PARTS}">'
+    if link in text:
+        return text
+    fam = f'<link rel="stylesheet" href="{"../" * (rel.count("/") - 1)}family.css">'
+    if fam not in text:
+        raise SystemExit(f'{rel}: no family.css link to put the Parts Kit after')
+    return text.replace(fam, f'{fam}\n  {link}', 1)
 
 
 def stamp_family(data, host, check):
@@ -465,6 +482,7 @@ def stamp_family(data, host, check):
                             crumb(lang, apps[app_id], help_root, catalog_root + f'#{app_id}', privacy), rel)
         new = replace_block(new, 'neo-apps:family',
                             guard(rel, family(data, lang, app_id, catalog_root, icon_root)), rel)
+        new = parts_link(new, rel)
         if new != text:
             stale.append(rel)
             if not check:
@@ -476,6 +494,8 @@ def stamp_family(data, host, check):
             if not check:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(blob)
+    if not (host / HOSTED_PARTS).is_file():
+        stale.append(HOSTED_PARTS + ' (missing: run packages/neorgon-ui/sync-parts.sh --to ' + host.name + ')')
     extra = sorted(p.relative_to(host).as_posix() for p in (host / HOSTED_ASSETS).glob('*')
                    if p.relative_to(host).as_posix() not in want) if (host / HOSTED_ASSETS).is_dir() else []
     for rel in extra:
@@ -518,7 +538,7 @@ def main(argv):
             if stale:
                 print('stale on ' + host.name + ': ' + ', '.join(stale))
                 return 1
-            print(f'{host.name}: the Kurukuru pages carry the current crumb, shelf and icons')
+            print(f'{host.name}: the Kurukuru pages carry the current crumb, shelf, icons and Parts Kit link')
             return 0
         print(f'{host.name}: ' + (', '.join(stale) if stale else 'already current'))
         return 0
