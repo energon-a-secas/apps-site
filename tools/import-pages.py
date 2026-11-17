@@ -19,12 +19,13 @@ nobody meant to publish:
     python3 tools/import-pages.py --rewrap all      # or one app: --rewrap pittari
     python3 tools/import-pages.py --rewrap all --check   # exit 1 when a page is not in the current shell
 
-The shell around the words: a crumb back to the app's band in the catalog, a
-kicker built from the app's facts (a privacy page keeps its draft's effective
-date), the draft's contents list as a rail or a row of chips, and the family
-shelf at the foot (also kept current by tools/build-catalog.py). A published
-app's pages carry Safari's install banner, and its help page the icon and the
-install button. App facts come from data/apps.json.
+The shell around the words: a crumb back to the app's band in the catalog, the
+app's icon beside the h1 on a help page, the draft's kicker moved to follow
+the h1 (its words kept exactly: they are what the store's reviewers read), the
+draft's contents list as a rail or a row of chips, and the family shelf at the
+foot (also kept current by tools/build-catalog.py). A published app's pages
+carry Safari's install banner, and its help page the install button. App facts
+come from data/apps.json.
 
 An app in several languages lists them under 'langs', its store record's
 primary language first. That language's drafts sit at the top of the folder
@@ -85,9 +86,6 @@ APPS = {
 
 CSP = ("default-src 'none'; style-src 'self' https://cdn.neorgon.org/v1.0.0/; img-src 'self'; "
        "font-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'")
-ARROW = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">'
-         '<path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" '
-         'stroke-linecap="round" stroke-linejoin="round"/></svg>')
 MARK = re.compile(r'<!-- draft:(head|toc|body) -->\n(.*?)\n<!-- /draft:\1 -->', re.S)
 
 
@@ -118,20 +116,22 @@ def split(inner, path):
     return head, toc.strip('\n'), body.strip('\n')
 
 
-def kicker(head, app, cfg, privacy, path):
-    """Replace the draft's kicker with one built from the app's facts; a privacy
-    page keeps its draft's effective date, with its label."""
-    m = re.search(r'<p class="kicker">(.*?)</p>', head, re.S)
+def kicker_after_h1(head, privacy, cfg, path):
+    """The draft's kicker, word for word, moved from above the h1 to just below
+    it, so a page opens on its h1 and not on an eyebrow. Idempotent. A privacy
+    page's kicker must still carry its effective date."""
+    m = re.search(r'[ \t]*<p class="kicker">(.*?)</p>\n?', head, re.S)
     if not m:
         sys.exit(f'{path}: no <p class="kicker">')
-    if privacy:
-        date = DATES[cfg['lang']].search(re.sub(r'<[^>]+>', '', m.group(1)))
-        if not date:
-            sys.exit(f'{path}: no effective date in the kicker "{m.group(1)}"')
-        text = f'{cfg["policy"]} · {cfg["in_effect"]} {date.group(0)}'
-    else:
-        text = f'{app["name"]} · {" · ".join(app["platforms"])} · {cfg["help"]}'
-    return head[:m.start()] + f'<p class="kicker">{html.escape(text, quote=False)}</p>' + head[m.end():]
+    if privacy and not DATES[cfg['lang']].search(re.sub(r'<[^>]+>', '', m.group(1))):
+        sys.exit(f'{path}: no effective date in the kicker "{m.group(1)}"')
+    h1 = re.search(r'<h1\b.*?</h1>\n?', head, re.S)
+    if not h1 or h1.start() < m.start():
+        return head
+    rest = head[:m.start()] + head[m.end():]
+    h1 = re.search(r'<h1\b.*?</h1>', rest, re.S)
+    indent = re.search(r'[ \t]*$', rest[:h1.start()]).group(0)
+    return rest[:h1.end()] + '\n' + indent + m.group(0).strip() + rest[h1.end():]
 
 
 def page(data, app_id, cfg, parts, meta, privacy, sub='', editions=(), original=None):
@@ -148,8 +148,7 @@ def page(data, app_id, cfg, parts, meta, privacy, sub='', editions=(), original=
     root = '../' * (1 + sub.count('/') + (1 if privacy else 0))
     home = '../' if privacy else './'
     head, toc, body = parts
-    if not APPS[app_id].get('handwritten'):
-        head = kicker(head, app, cfg, privacy, f'{app_id}/{sub}{tail}')
+    head = kicker_after_h1(head, privacy, cfg, f'{app_id}/{sub}{tail}')
     published = app['status'] == 'available' and app.get('store')
 
     languages = ''.join(
@@ -159,11 +158,12 @@ def page(data, app_id, cfg, parts, meta, privacy, sub='', editions=(), original=
     crumb_html = crumb(lang, app, home, f'{root}#{app_id}', privacy, langs_nav)
 
     hero_icon, install, hero = '', '', ''
-    if published and not privacy:
+    if not privacy:
         hero = ' doc-head--hero'
         hero_icon = (f'\n      <img class="doc-hero__icon" src="{root}{app["icon"]}" alt="" width="88" height="88">')
+    if published and not privacy:
         install = (f'\n      <p class="doc-install"><a class="doc-install__cta" href="{app["store"]["url"]}" '
-                   f'rel="noreferrer">{cfg["install"].format(store=app["store"]["name"])}{ARROW}</a></p>')
+                   f'rel="noreferrer">{cfg["install"].format(store=app["store"]["name"])}</a></p>')
 
     main = (f'<main id="main" class="doc-main doc-main--shell" tabindex="-1">\n'
             f'    <!-- neo-apps:crumb -->{crumb_html}<!-- /neo-apps:crumb -->\n'

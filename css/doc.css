@@ -85,17 +85,21 @@
 #main.doc-main.doc-main--shell { width: min(100% - 40px, 46rem); padding-top: 8px; }
 .doc-main--shell > .neo-crumb, .doc-main--shell > .neo-crumb-row { margin-bottom: clamp(12px, 3vw, 32px); }
 .doc-main--shell .doc-langs a { min-height: 44px; }
-.doc-main--shell .kicker { align-items: flex-start; line-height: 1.5; }
-.doc-main--shell .kicker::before { margin-top: calc(0.75em - 4px); }
+/* The draft's kicker follows the h1 as a quiet line of facts, word for word;
+   the page opens on its h1, not on an eyebrow. */
+.doc-main--shell .kicker { display: block; margin: calc(-1 * var(--space-2)) 0 var(--space-4); color: var(--text-secondary); font-size: var(--text-sm); letter-spacing: 0; line-height: 1.5; }
+.doc-main--shell .kicker::before { content: none; }
 .doc-main--shell .lead { max-width: 40rem; }
 .doc-body { max-width: 34rem; }
 
-/* A published app's page opens with its icon and the way to install it. */
-.doc-head--hero { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 18px; align-items: center; }
+/* A help page opens with the app's icon beside its h1, and a published app's
+   with the way to install it under the lead. */
+.doc-head--hero { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 20px; align-items: center; }
 .doc-head--hero > * { grid-column: 1 / -1; }
 .doc-head--hero > .doc-hero__icon { grid-column: 1; grid-row: 1; width: 72px; height: 72px; border-radius: 22.5%;
-  filter: drop-shadow(0 10px 22px color-mix(in oklab, var(--app-hue) 45%, transparent)); }
-.doc-head--hero > .kicker { grid-column: 2; grid-row: 1; }
+  filter: drop-shadow(0 8px 16px rgb(0 0 0 / 45%)); }
+.doc-head--hero > h1 { grid-column: 2; grid-row: 1; margin: 0; }
+.doc-head--hero > .kicker { margin-top: var(--space-4); }
 .doc-install { margin: var(--space-2) 0 var(--space-4); }
 .doc-main a.doc-install__cta {
   display: inline-flex;
@@ -110,6 +114,8 @@
   text-decoration: none;
 }
 .doc-main a.doc-install__cta:hover { background: color-mix(in oklab, var(--app-ink) 80%, #fff); text-decoration: none; }
+.doc-main a.doc-install__cta:active { background: color-mix(in oklab, var(--app-ink) 88%, #000); transform: translateY(1px); }
+@media (prefers-reduced-motion: reduce) { .doc-main a.doc-install__cta:active { transform: none; } }
 .doc-install__cta svg { flex: none; }
 
 /* The draft's contents: a row of chips that scrolls sideways. */
@@ -175,6 +181,11 @@
   .doc-main--shell .doc-shell > .contents a:hover { background: var(--surface-2); color: var(--text-primary); }
   .doc-main--shell .doc-body { grid-column: 2; grid-row: 3; }
   .doc-head--hero > .doc-hero__icon { width: 88px; height: 88px; }
+}
+/* A phone puts the icon above a long h1 rather than squeezing it. */
+@media (max-width: 480px) {
+  .doc-head--hero > .doc-hero__icon { grid-column: 1 / -1; width: 64px; height: 64px; margin-bottom: var(--space-4); }
+  .doc-head--hero > h1 { grid-column: 1 / -1; grid-row: 2; }
 }
 
 @media print {
